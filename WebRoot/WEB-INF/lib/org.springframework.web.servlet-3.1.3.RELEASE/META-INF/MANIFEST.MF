@@ -1,0 +1,273 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.2
+Created-By: 1.6.0_29-b11-402-11M3811 (Apple Inc.)
+Export-Package: org.springframework.web.servlet;version="3.1.3.RELEASE
+ ";uses:="javax.servlet,javax.servlet.http,org.springframework.beans,o
+ rg.springframework.context,org.springframework.context.event,org.spri
+ ngframework.context.i18n,org.springframework.core.env,org.springframe
+ work.ui,org.springframework.ui.context,org.springframework.util,org.s
+ pringframework.web.context,org.springframework.web.multipart",org.spr
+ ingframework.web.servlet.config;version="3.1.3.RELEASE";uses:="org.sp
+ ringframework.beans.factory.config,org.springframework.beans.factory.
+ xml,org.w3c.dom",org.springframework.web.servlet.config.annotation;ve
+ rsion="3.1.3.RELEASE";uses:="javax.servlet,javax.servlet.http,org.spr
+ ingframework.beans,org.springframework.beans.factory.annotation,org.s
+ pringframework.context,org.springframework.context.annotation,org.spr
+ ingframework.core.io,org.springframework.format,org.springframework.f
+ ormat.support,org.springframework.validation,org.springframework.web.
+ context,org.springframework.web.context.request,org.springframework.w
+ eb.servlet,org.springframework.web.servlet.handler,org.springframewor
+ k.web.servlet.mvc,org.springframework.web.servlet.mvc.method.annotati
+ on,org.springframework.web.servlet.resource",org.springframework.web.
+ servlet.handler;version="3.1.3.RELEASE";uses:="javax.servlet,javax.se
+ rvlet.http,org.springframework.beans,org.springframework.beans.factor
+ y,org.springframework.beans.factory.config,org.springframework.contex
+ t,org.springframework.core,org.springframework.core.convert,org.sprin
+ gframework.util,org.springframework.web.context,org.springframework.w
+ eb.context.request,org.springframework.web.context.support,org.spring
+ framework.web.method,org.springframework.web.servlet,org.springframew
+ ork.web.util",org.springframework.web.servlet.i18n;version="3.1.3.REL
+ EASE";uses:="javax.servlet,javax.servlet.http,org.springframework.web
+ .servlet,org.springframework.web.servlet.handler,org.springframework.
+ web.util",org.springframework.web.servlet.mvc;version="3.1.3.RELEASE"
+ ;uses:="javax.servlet,javax.servlet.http,org.springframework.beans,or
+ g.springframework.beans.factory,org.springframework.util,org.springfr
+ amework.validation,org.springframework.web.bind,org.springframework.w
+ eb.bind.support,org.springframework.web.servlet,org.springframework.w
+ eb.servlet.support,org.springframework.web.util",org.springframework.
+ web.servlet.mvc.annotation;version="3.1.3.RELEASE";uses:="javax.servl
+ et,javax.servlet.http,org.apache.commons.logging,org.springframework.
+ beans.factory,org.springframework.beans.factory.config,org.springfram
+ ework.core,org.springframework.http,org.springframework.http.converte
+ r,org.springframework.ui,org.springframework.util,org.springframework
+ .web.bind,org.springframework.web.bind.annotation,org.springframework
+ .web.bind.annotation.support,org.springframework.web.bind.support,org
+ .springframework.web.context.request,org.springframework.web.servlet,
+ org.springframework.web.servlet.handler,org.springframework.web.servl
+ et.mvc.multiaction,org.springframework.web.servlet.support,org.spring
+ framework.web.util",org.springframework.web.servlet.mvc.condition;ver
+ sion="3.1.3.RELEASE";uses:="javax.servlet.http,org.springframework.ht
+ tp,org.springframework.util,org.springframework.web.bind.annotation,o
+ rg.springframework.web.util",org.springframework.web.servlet.mvc.meth
+ od;version="3.1.3.RELEASE";uses:="javax.servlet,javax.servlet.http,or
+ g.springframework.core,org.springframework.web.method,org.springframe
+ work.web.servlet,org.springframework.web.servlet.handler,org.springfr
+ amework.web.servlet.mvc.condition,org.springframework.web.servlet.sup
+ port",org.springframework.web.servlet.mvc.method.annotation;version="
+ 3.1.3.RELEASE";uses:="javax.servlet,javax.servlet.http,org.springfram
+ ework.beans,org.springframework.beans.factory,org.springframework.bea
+ ns.factory.config,org.springframework.core,org.springframework.http,o
+ rg.springframework.http.server,org.springframework.util,org.springfra
+ mework.web,org.springframework.web.bind,org.springframework.web.bind.
+ annotation,org.springframework.web.bind.support,org.springframework.w
+ eb.context.request,org.springframework.web.method,org.springframework
+ .web.method.annotation,org.springframework.web.method.support,org.spr
+ ingframework.web.servlet,org.springframework.web.servlet.handler,org.
+ springframework.web.servlet.mvc.condition,org.springframework.web.ser
+ vlet.mvc.method,org.springframework.web.util",org.springframework.web
+ .servlet.mvc.multiaction;version="3.1.3.RELEASE";uses:="javax.servlet
+ ,javax.servlet.http,org.springframework.beans.factory,org.springframe
+ work.util,org.springframework.validation,org.springframework.web.bind
+ ,org.springframework.web.bind.support,org.springframework.web.servlet
+ ,org.springframework.web.servlet.mvc,org.springframework.web.util",or
+ g.springframework.web.servlet.mvc.support;version="3.1.3.RELEASE";use
+ s:="javax.servlet.http,org.springframework.beans,org.springframework.
+ http.converter,org.springframework.ui,org.springframework.validation,
+ org.springframework.web,org.springframework.web.bind,org.springframew
+ ork.web.multipart.support,org.springframework.web.servlet,org.springf
+ ramework.web.servlet.handler,org.springframework.web.servlet.mvc.mult
+ iaction",org.springframework.web.servlet.resource;version="3.1.3.RELE
+ ASE";uses:="javax.activation,javax.servlet,javax.servlet.http,org.spr
+ ingframework.core.io,org.springframework.http,org.springframework.web
+ ,org.springframework.web.context,org.springframework.web.servlet.supp
+ ort",org.springframework.web.servlet.support;version="3.1.3.RELEASE";
+ uses:="javax.servlet,javax.servlet.http,javax.servlet.jsp,javax.servl
+ et.jsp.jstl.fmt,org.springframework.context,org.springframework.ui.co
+ ntext,org.springframework.validation,org.springframework.web.context,
+ org.springframework.web.context.support,org.springframework.web.servl
+ et,org.springframework.web.util",org.springframework.web.servlet.tags
+ ;version="3.1.3.RELEASE";uses:="javax.servlet,javax.servlet.jsp,javax
+ .servlet.jsp.tagext,org.springframework.context,org.springframework.e
+ xpression,org.springframework.validation,org.springframework.web.serv
+ let.support",org.springframework.web.servlet.tags.form;version="3.1.3
+ .RELEASE";uses:="javax.servlet.jsp,javax.servlet.jsp.tagext,org.sprin
+ gframework.web.servlet.support,org.springframework.web.servlet.tags",
+ org.springframework.web.servlet.theme;version="3.1.3.RELEASE";uses:="
+ javax.servlet,javax.servlet.http,org.springframework.web.servlet,org.
+ springframework.web.servlet.handler,org.springframework.web.util",org
+ .springframework.web.servlet.view;version="3.1.3.RELEASE";uses:="java
+ x.activation,javax.servlet,javax.servlet.http,org.apache.commons.logg
+ ing,org.springframework.beans,org.springframework.beans.factory,org.s
+ pringframework.context,org.springframework.core,org.springframework.c
+ ore.io,org.springframework.http,org.springframework.web.context.suppo
+ rt,org.springframework.web.servlet,org.springframework.web.servlet.su
+ pport,org.springframework.web.util",org.springframework.web.servlet.v
+ iew.document;version="3.1.3.RELEASE";uses:="com.lowagie.text,com.lowa
+ gie.text.pdf,javax.servlet.http,jxl,jxl.write,org.apache.poi.hssf.use
+ rmodel,org.springframework.web.servlet.view",org.springframework.web.
+ servlet.view.feed;version="3.1.3.RELEASE";uses:="com.sun.syndication.
+ feed,com.sun.syndication.feed.atom,com.sun.syndication.feed.rss,javax
+ .servlet.http,org.springframework.web.servlet.view",org.springframewo
+ rk.web.servlet.view.freemarker;version="3.1.3.RELEASE";uses:="freemar
+ ker.ext.jsp,freemarker.template,javax.servlet,javax.servlet.http,org.
+ springframework.beans,org.springframework.beans.factory,org.springfra
+ mework.context,org.springframework.ui.freemarker,org.springframework.
+ web.context,org.springframework.web.servlet.view",org.springframework
+ .web.servlet.view.jasperreports;version="3.1.3.RELEASE";uses:="javax.
+ servlet.http,javax.sql,net.sf.jasperreports.engine,org.springframewor
+ k.context,org.springframework.core.io,org.springframework.web.servlet
+ .view",org.springframework.web.servlet.view.json;version="3.1.3.RELEA
+ SE";uses:="com.fasterxml.jackson.core,com.fasterxml.jackson.databind,
+ javax.servlet.http,org.codehaus.jackson,org.codehaus.jackson.map,org.
+ springframework.web.servlet.view",org.springframework.web.servlet.vie
+ w.tiles2;version="3.1.3.RELEASE";uses:="javax.servlet,javax.servlet.h
+ ttp,org.apache.tiles,org.apache.tiles.context,org.apache.tiles.defini
+ tion,org.apache.tiles.definition.dao,org.apache.tiles.factory,org.apa
+ che.tiles.impl,org.apache.tiles.locale,org.apache.tiles.locale.impl,o
+ rg.apache.tiles.preparer,org.apache.tiles.servlet.context,org.apache.
+ tiles.startup,org.springframework.beans.factory,org.springframework.w
+ eb.context,org.springframework.web.servlet.view",org.springframework.
+ web.servlet.view.velocity;version="3.1.3.RELEASE";uses:="javax.servle
+ t,javax.servlet.http,org.apache.velocity,org.apache.velocity.app,org.
+ apache.velocity.context,org.apache.velocity.exception,org.apache.velo
+ city.tools.generic,org.springframework.beans,org.springframework.bean
+ s.factory,org.springframework.context,org.springframework.ui.velocity
+ ,org.springframework.web.context,org.springframework.web.servlet.view
+ ",org.springframework.web.servlet.view.xml;version="3.1.3.RELEASE";us
+ es:="javax.servlet,javax.servlet.http,org.springframework.beans,org.s
+ pringframework.oxm,org.springframework.web.servlet.view",org.springfr
+ amework.web.servlet.view.xslt;version="3.1.3.RELEASE";uses:="javax.se
+ rvlet.http,javax.xml.transform,org.springframework.beans,org.springfr
+ amework.context,org.springframework.core.io,org.springframework.web.s
+ ervlet.view"
+Bundle-Vendor: SpringSource
+Bundle-Version: 3.1.3.RELEASE
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: Spring Web Servlet
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.springframework.web.servlet
+Import-Package: com.fasterxml.jackson.core;version="[2.0.0, 3.0.0)";re
+ solution:="optional",com.fasterxml.jackson.databind;version="[2.0.0, 
+ 3.0.0)";resolution:="optional",com.lowagie.text;version="[2.0.0, 3.0.
+ 0)";resolution:="optional",com.lowagie.text.pdf;version="[2.0.0, 3.0.
+ 0)";resolution:="optional",com.sun.syndication.feed;version="[1.0.0, 
+ 2.0.0)";resolution:="optional",com.sun.syndication.feed.atom;version=
+ "[1.0.0, 2.0.0)";resolution:="optional",com.sun.syndication.feed.rss;
+ version="[1.0.0, 2.0.0)";resolution:="optional",com.sun.syndication.i
+ o;version="[1.0.0, 2.0.0)";resolution:="optional",freemarker.cache;ve
+ rsion="[2.3.14, 3.0.0)";resolution:="optional",freemarker.core;versio
+ n="[2.3.14, 3.0.0)";resolution:="optional",freemarker.ext.jsp;version
+ ="[2.3.14, 3.0.0)";resolution:="optional",freemarker.ext.servlet;vers
+ ion="[2.3.14, 3.0.0)";resolution:="optional",freemarker.template;vers
+ ion="[2.3.14, 3.0.0)";resolution:="optional",javax.activation;version
+ ="0";resolution:="optional",javax.el;version="[1.0.0, 3.0.0)";resolut
+ ion:="optional",javax.servlet;version="[2.4.0, 4.0.0)",javax.servlet.
+ http;version="[2.4.0, 4.0.0)",javax.servlet.jsp;version="[2.0.0, 3.0.
+ 0)";resolution:="optional",javax.servlet.jsp.el;version="[2.0.0, 3.0.
+ 0)";resolution:="optional",javax.servlet.jsp.jstl.core;version="[1.1.
+ 0, 2.0.0)";resolution:="optional",javax.servlet.jsp.jstl.fmt;version=
+ "[1.1.0, 2.0.0)";resolution:="optional",javax.servlet.jsp.tagext;vers
+ ion="[2.0.0, 3.0.0)";resolution:="optional",javax.sql;version="0";res
+ olution:="optional",javax.xml.transform;version="0";resolution:="opti
+ onal",javax.xml.transform.dom;version="0";resolution:="optional",java
+ x.xml.transform.stream;version="0";resolution:="optional",jxl;version
+ ="[2.6.6, 3.0.0)";resolution:="optional",jxl.write;version="[2.6.6, 3
+ .0.0)";resolution:="optional",net.sf.jasperreports.engine;version="[2
+ .0.5, 4.0.0)";resolution:="optional",net.sf.jasperreports.engine.desi
+ gn;version="[2.0.5, 4.0.0)";resolution:="optional",net.sf.jasperrepor
+ ts.engine.export;version="[2.0.5, 4.0.0)";resolution:="optional",net.
+ sf.jasperreports.engine.util;version="[2.0.5, 4.0.0)";resolution:="op
+ tional",net.sf.jasperreports.engine.xml;version="[2.0.5, 4.0.0)";reso
+ lution:="optional",org.apache.commons.logging;version="[1.1.1, 2.0.0)
+ ";resolution:="optional",org.apache.poi.hssf.usermodel;version="[3.0.
+ 2.FINAL, 4.0.0)";resolution:="optional",org.apache.poi.poifs.filesyst
+ em;version="[3.0.2.FINAL, 4.0.0)";resolution:="optional",org.apache.t
+ iles;version="[2.1.2, 3.0.0)";resolution:="optional",org.apache.tiles
+ .awareness;version="[2.1.2, 3.0.0)";resolution:="optional",org.apache
+ .tiles.context;version="[2.1.2, 3.0.0)";resolution:="optional",org.ap
+ ache.tiles.definition;version="[2.1.2, 3.0.0)";resolution:="optional"
+ ,org.apache.tiles.definition.dao;version="[2.1.2, 3.0.0)";resolution:
+ ="optional",org.apache.tiles.definition.digester;version="[2.1.2, 3.0
+ .0)";resolution:="optional",org.apache.tiles.evaluator;version="[2.1.
+ 2, 3.0.0)";resolution:="optional",org.apache.tiles.evaluator.el;versi
+ on="[2.1.2, 3.0.0)";resolution:="optional",org.apache.tiles.evaluator
+ .impl;version="[2.1.2, 3.0.0)";resolution:="optional",org.apache.tile
+ s.factory;version="[2.1.2, 3.0.0)";resolution:="optional",org.apache.
+ tiles.impl;version="[2.1.2, 3.0.0)";resolution:="optional",org.apache
+ .tiles.impl.mgmt;version="[2.1.2, 3.0.0)";resolution:="optional",org.
+ apache.tiles.jsp.context;version="[2.1.2, 3.0.0)";resolution:="option
+ al",org.apache.tiles.locale;version="[2.1.2, 3.0.0)";resolution:="opt
+ ional",org.apache.tiles.locale.impl;version="[2.1.2, 3.0.0)";resoluti
+ on:="optional",org.apache.tiles.preparer;version="[2.1.2, 3.0.0)";res
+ olution:="optional",org.apache.tiles.renderer;version="[2.1.2, 3.0.0)
+ ";resolution:="optional",org.apache.tiles.servlet.context;version="[2
+ .1.2, 3.0.0)";resolution:="optional",org.apache.tiles.startup;version
+ ="[2.1.2, 3.0.0)";resolution:="optional",org.apache.velocity;version=
+ "[1.5.0, 2.0.0)";resolution:="optional",org.apache.velocity.app;versi
+ on="[1.5.0, 2.0.0)";resolution:="optional",org.apache.velocity.contex
+ t;version="[1.5.0, 2.0.0)";resolution:="optional",org.apache.velocity
+ .exception;version="[1.5.0, 2.0.0)";resolution:="optional",org.apache
+ .velocity.runtime.resource.loader;version="[1.5.0, 2.0.0)";resolution
+ :="optional",org.apache.velocity.tools.generic;version="[1.4.0, 3.0.0
+ )";resolution:="optional",org.apache.velocity.tools.view;version="[1.
+ 4.0, 3.0.0)";resolution:="optional",org.apache.velocity.tools.view.co
+ ntext;version="[1.4.0, 3.0.0)";resolution:="optional",org.apache.velo
+ city.tools.view.servlet;version="[1.4.0, 3.0.0)";resolution:="optiona
+ l",org.codehaus.jackson;version="[1.3.0, 2.0.0)";resolution:="optiona
+ l",org.codehaus.jackson.map;version="[1.3.0, 2.0.0)";resolution:="opt
+ ional",org.springframework.beans;version="[3.1.3,3.1.4)",org.springfr
+ amework.beans.factory;version="[3.1.3,3.1.4)",org.springframework.bea
+ ns.factory.annotation;version="[3.1.3,3.1.4)",org.springframework.bea
+ ns.factory.config;version="[3.1.3,3.1.4)",org.springframework.beans.f
+ actory.parsing;version="[3.1.3,3.1.4)",org.springframework.beans.fact
+ ory.support;version="[3.1.3,3.1.4)",org.springframework.beans.factory
+ .xml;version="[3.1.3,3.1.4)",org.springframework.context;version="[3.
+ 1.3,3.1.4)",org.springframework.context.annotation;version="[3.1.3,3.
+ 1.4)",org.springframework.context.event;version="[3.1.3,3.1.4)",org.s
+ pringframework.context.expression;version="[3.1.3,3.1.4)",org.springf
+ ramework.context.i18n;version="[3.1.3,3.1.4)",org.springframework.con
+ text.support;version="[3.1.3,3.1.4)",org.springframework.core;version
+ ="[3.1.3,3.1.4)",org.springframework.core.annotation;version="[3.1.3,
+ 3.1.4)",org.springframework.core.convert;version="[3.1.3,3.1.4)",org.
+ springframework.core.enums;version="[3.1.3,3.1.4)",org.springframewor
+ k.core.env;version="[3.1.3,3.1.4)",org.springframework.core.io;versio
+ n="[3.1.3,3.1.4)",org.springframework.core.io.support;version="[3.1.3
+ ,3.1.4)",org.springframework.core.style;version="[3.1.3,3.1.4)",org.s
+ pringframework.expression;version="[3.1.3,3.1.4)",org.springframework
+ .expression.spel.standard;version="[3.1.3,3.1.4)",org.springframework
+ .expression.spel.support;version="[3.1.3,3.1.4)",org.springframework.
+ format;version="[3.1.3,3.1.4)",org.springframework.format.support;ver
+ sion="[3.1.3,3.1.4)",org.springframework.http;version="[3.1.3,3.1.4)"
+ ,org.springframework.http.converter;version="[3.1.3,3.1.4)",org.sprin
+ gframework.http.converter.feed;version="[3.1.3,3.1.4)",org.springfram
+ ework.http.converter.json;version="[3.1.3,3.1.4)",org.springframework
+ .http.converter.xml;version="[3.1.3,3.1.4)",org.springframework.http.
+ server;version="[3.1.3,3.1.4)",org.springframework.oxm;version="[3.1.
+ 3,3.1.4)";resolution:="optional",org.springframework.stereotype;versi
+ on="[3.1.3,3.1.4)",org.springframework.ui;version="[3.1.3,3.1.4)",org
+ .springframework.ui.context;version="[3.1.3,3.1.4)",org.springframewo
+ rk.ui.context.support;version="[3.1.3,3.1.4)",org.springframework.ui.
+ freemarker;version="[3.1.3,3.1.4)",org.springframework.ui.jasperrepor
+ ts;version="[3.1.3,3.1.4)",org.springframework.ui.velocity;version="[
+ 3.1.3,3.1.4)",org.springframework.util;version="[3.1.3,3.1.4)",org.sp
+ ringframework.util.xml;version="[3.1.3,3.1.4)",org.springframework.va
+ lidation;version="[3.1.3,3.1.4)",org.springframework.validation.beanv
+ alidation;version="[3.1.3,3.1.4)",org.springframework.validation.supp
+ ort;version="[3.1.3,3.1.4)",org.springframework.web;version="[3.1.3,3
+ .1.4)",org.springframework.web.bind;version="[3.1.3,3.1.4)",org.sprin
+ gframework.web.bind.annotation;version="[3.1.3,3.1.4)",org.springfram
+ ework.web.bind.annotation.support;version="[3.1.3,3.1.4)",org.springf
+ ramework.web.bind.support;version="[3.1.3,3.1.4)",org.springframework
+ .web.context;version="[3.1.3,3.1.4)",org.springframework.web.context.
+ request;version="[3.1.3,3.1.4)",org.springframework.web.context.suppo
+ rt;version="[3.1.3,3.1.4)",org.springframework.web.method;version="[3
+ .1.3,3.1.4)",org.springframework.web.method.annotation;version="[3.1.
+ 3,3.1.4)",org.springframework.web.method.support;version="[3.1.3,3.1.
+ 4)",org.springframework.web.multipart;version="[3.1.3,3.1.4)",org.spr
+ ingframework.web.multipart.support;version="[3.1.3,3.1.4)",org.spring
+ framework.web.util;version="[3.1.3,3.1.4)",org.w3c.dom;version="0";re
+ solution:="optional",org.xml.sax;version="0";resolution:="optional"
+Bundle-Creator: cbeams
+Implementation-Title: org.springframework.web.servlet
+Implementation-Version: 3.1.3.RELEASE
+
