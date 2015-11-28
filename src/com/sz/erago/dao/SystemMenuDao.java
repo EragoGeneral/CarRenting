@@ -9,15 +9,19 @@ public interface SystemMenuDao {
 
     int insert(SystemMenu record);
 
-    int insertSelective(SystemMenu record);
-
     SystemMenu selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(SystemMenu record);
 
-    int updateByPrimaryKey(SystemMenu record);
+   
     
     public List<SystemMenu> queryAllMenus();
     
     public SystemMenu getMenuInfoByID(Integer menuID);
+    
+    public int insertSelective(SystemMenu menu);
+    
+    public int updateByPrimaryKey(SystemMenu record);
+    
+    public int disabledMenuByID(Integer menuID);
 }

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sz.erago.dao.SystemUserDao" >
+  <resultMap id="BaseResultMap" type="com.sz.erago.model.SystemUsers" >
+    <id column="ID" property="id" jdbcType="INTEGER" />    
+    <result column="Login_Name" property="loginName" jdbcType="VARCHAR" />
+    <result column="User_Name" property="userName" jdbcType="VARCHAR" />
+    <result column="Password" property="password" jdbcType="VARCHAR" />
+    <result column="Gender" property="gender" jdbcType="VARCHAR" />        
+    <result column="Birth" property="birth" jdbcType="VARCHAR" /> 
+    <result column="Dept_No" property="deptNo" jdbcType="INTEGER" />        
+    <result column="Email" property="email" jdbcType="VARCHAR" />    
+    <result column="Mobile" property="mobile" jdbcType="VARCHAR" />    
+    <result column="Address" property="address" jdbcType="VARCHAR" />    
+    <result column="Create_By" property="createBy" jdbcType="INTEGER" />
+    <result column="Create_Date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="Update_By" property="updateBy" jdbcType="INTEGER" />
+    <result column="Update_Date" property="updateDate" jdbcType="TIMESTAMP" />    
+    <result column="Is_Deleted" property="isDeleted" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, Login_Name, User_Name, Password, Gender, Birth, Dept_No, Email, Mobile, Address, Create_By, Create_Date, 
+    Update_By, Update_Date, Is_Deleted
+  </sql>
+  
+  <select id="getUserCount" resultType="java.lang.Integer" parameterType="com.sz.erago.model.SystemUsers">
+  	select 
+  	 count(*) as totalCount
+  	from system_users
+  	where is_deleted = 0
+  	<if test="userName != null" >
+       and User_Name like CONCAT('%',#{userName,jdbcType=VARCHAR},'%') 
+    </if>
+  	order by Dept_No
+  </select>
+  
+  <select id="queryAllUsers" resultMap="BaseResultMap"  parameterType="com.sz.erago.model.SystemUsers">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from system_users
+  	where is_deleted = 0
+  	<if test="userName != null" >
+       and User_Name like CONCAT('%',#{userName,jdbcType=VARCHAR},'%') 
+    </if>
+  	order by Dept_No
+  </select>
+  
+  <select id="queryAllUsers1" resultMap="BaseResultMap"  parameterType="java.util.Map">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from system_users
+  	where is_deleted = 0
+  	<if test="user.userName != null" >
+       and User_Name like CONCAT('%',#{user.userName,jdbcType=VARCHAR},'%') 
+    </if>
+  	order by Dept_No
+  	limit #{startIndex, jdbcType=INTEGER}, #{rows, jdbcType=INTEGER}
+  </select>
+  
+  <select id="getUserInfoByID" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  	select 
+    <include refid="Base_Column_List" />
+    from system_users
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="getUserInfoBySelectedID" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from system_users
+    where ID in 
+    <foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+	  #{item}  
+	 </foreach> 
+  </select>
+  
+  <update id="disableUserBySelectedID">
+  	update system_users
+  	set is_deleted = 1
+    where ID in 
+    <foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+	  #{item}  
+	 </foreach> 
+  </update>
+  
+  <insert id="insertSelective" parameterType="com.sz.erago.model.SystemUsers" useGeneratedKeys="true" keyProperty="id">
+    insert into system_users
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="loginName != null" >
+        Login_Name,
+      </if>
+      <if test="userName != null" >
+        User_Name,
+      </if>
+      <if test="password != null" >
+        Password,
+      </if>
+      <if test="gender != null" >
+        Gender,
+      </if>
+      <if test="birth != null" >
+        Birth,
+      </if>
+      <if test="deptNo != null" >
+        Dept_No,
+      </if>
+      <if test="email != null" >
+        Email,
+      </if>
+      <if test="mobile != null" >
+        Mobile,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="createBy != null" >
+        Create_By,
+      </if>
+      <if test="createDate != null" >
+        Create_Date,
+      </if>
+      <if test="updateBy != null" >
+        Update_By,
+      </if>
+      <if test="updateDate != null" >
+        Update_Date,
+      </if>
+      <if test="isDeleted != null" >
+        Is_Deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="loginName != null" >
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null" >
+        #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="deptNo != null" >
+        #{deptNo,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.sz.erago.model.SystemUsers" >
+    update system_users
+    <set >
+      <if test="loginName != null" >
+        Login_Name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        User_Name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        Gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null" >
+        Birth = #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="deptNo != null" >
+        Dept_No = #{deptNo,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        Mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        Address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        Create_By = #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        Create_Date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        Update_By = #{updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="updateDate != null" >
+        Update_Date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        Is_Deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

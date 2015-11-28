@@ -11,4 +11,8 @@ public interface ISystemService {
 	public List<SystemMenu> buildMenus();
 	
 	public List<TreeNode> loadMenu();
+	
+	public int saveMenu(SystemMenu menu);
+	
+	public int disabledMenuByID(int menuID);
 }

@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sz.erago.model.SystemMenu;
@@ -52,9 +50,15 @@ public class SystemController {
 	}
 	
 	@RequestMapping("/menumanagement")
-	public String goToManeMgt(){
+	public String goToMenuMgt(){
 		
 		return "/system/menu_mgt";
+	}
+	
+	@RequestMapping("/usermanagement")
+	public String goToUserMgt(){
+		
+		return "/system/user_mgt";
 	}
 
 	@RequestMapping("/loadMenu")
@@ -77,16 +81,32 @@ public class SystemController {
 	}
 	
 	@RequestMapping(value="/saveMenu", method = RequestMethod.POST)
-	public @ResponseBody Map<String, String> saveMenu(SystemMenu menu){
+	public @ResponseBody Map<String, Object> saveMenu(SystemMenu menu){
 		System.out.println("菜单名称: " + menu.getName());
 		System.out.println("菜单链接: " + menu.getLink());
 		System.out.println("菜单显示顺序: " + menu.getDisplayOrder());
 		System.out.println("菜单级别: " + menu.getLevel());
 		System.out.println("菜单父ID: " + menu.getParentId());
 		
-		Map<String, String> m = new HashMap<String, String>();
-		m.put("success", "1");
+		int menuID = menuService.saveMenu(menu);
+		
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("success", "true");
+		m.put("menu", menu);
 		
 		return m;
+	}
+	
+	@RequestMapping(value="/deleteMenuInfo", method = RequestMethod.POST)
+	public @ResponseBody Map<String, String> deleteMenuInfo(Integer id){
+		Map<String, String> res = new HashMap<String, String>();
+		int flag = menuService.disabledMenuByID(id);
+		if(flag == 1){
+			res.put("success", "true");
+		}else{
+			res.put("success", "false");
+		}
+		
+		return res;
 	}
 }

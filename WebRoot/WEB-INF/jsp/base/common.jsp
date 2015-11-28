@@ -9,3 +9,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="<%=basePath%>/static/css/demo.css">
 <script type="text/javascript" src="<%=basePath%>/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>/static/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>/static/js/common.js"></script>
+<script src="<%=basePath%>/static/js/easyui-lang-zh_CN.js" type="text/javascript"></script>

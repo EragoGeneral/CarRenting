@@ -1,5 +1,6 @@
 package com.sz.erago.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -82,4 +83,31 @@ public class SystemServiceImpl implements ISystemService {
 		return nodes;
 	}
 	
+	public int saveMenu(SystemMenu menu){
+		Integer menuID = menu.getId();
+		if(menuID == null){
+			SystemMenu parentMenu = menuDao.getMenuInfoByID(menu.getParentId());
+			String path = parentMenu.getPath();
+			
+			menu.setCreateBy(1);
+			menu.setUpdateBy(1);
+			menu.setCreateDate(new Timestamp(System.currentTimeMillis()));
+			menu.setUpdateDate(new Timestamp(System.currentTimeMillis()));
+			menu.setIsDeleted(false);
+			menuDao.insertSelective(menu);
+			path = path + "." + menu.getId();
+			menu.setPath(path);
+			menuID = menuDao.updateByPrimaryKey(menu);
+		}else{
+			menuDao.updateByPrimaryKeySelective(menu);
+		}
+		
+		return menuID.intValue();
+	}
+	
+	public int disabledMenuByID(int menuID){
+		int flag = menuDao.disabledMenuByID(menuID);
+		
+		return flag;
+	}
 }

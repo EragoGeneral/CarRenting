@@ -45,6 +45,13 @@
     delete from system_menus
     where ID = #{id,jdbcType=INTEGER}
   </delete>
+  
+  <update id="disabledMenuByID" parameterType="java.lang.Integer" >
+    update system_menus
+    set Is_Deleted = 1
+    where ID = #{id}
+  </update>
+  
   <insert id="insert" parameterType="com.sz.erago.model.SystemMenu" >
     insert into system_menus (ID, Name, Link, 
       Display_Order, Parent_ID, Level, 
@@ -57,7 +64,7 @@
       #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, #{updateDate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.sz.erago.model.SystemMenu" >
+  <insert id="insertSelective" parameterType="com.sz.erago.model.SystemMenu" useGeneratedKeys="true" keyProperty="id">
     insert into system_menus
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
