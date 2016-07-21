@@ -15,6 +15,7 @@
 	<mvc:annotation-driven />
 
 	<mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:default-servlet-handler />
 	
 	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->

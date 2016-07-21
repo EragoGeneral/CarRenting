@@ -44,7 +44,8 @@ String basePath1 = request.getScheme()+"://"+request.getServerName()+":"+request
                 	var scontent = '';
                 	if(sarr != null){
                 		$.each(sarr, function(idx, sn){                		
-                			scontent += "<div class='menuDiv'><a class='menuLink' href=\"javascript:addTab('tabId_"+ sn.id +"', '"+ sn.name +"', '<%=basePath1%>"+ sn.link +"');\">"+ sn.name +"</a></div>";
+                			scontent += "<div class='menuDiv'>"
+                				+"<img src='<%=basePath1%>/static/images/1.jpg' style='width:50px;height:50px;' /><a class='menuLink' href=\"javascript:addTab('tabId_"+ sn.id +"', '"+ sn.name +"', '<%=basePath1%>"+ sn.link +"');\">"+ sn.name +"</a></div>";
                 		});
                 	}
                     $('#menu').accordion('add',{
@@ -100,42 +101,18 @@ String basePath1 = request.getScheme()+"://"+request.getServerName()+":"+request
 		style="width:220px;">
 		<!-- 子模块：模板管理 -->
 		<div id="menu" class="easyui-accordion" data-options="fit:true,border:false">
-			<!--  
-			<div title="客户管理" class="firstMenu">
-				<div><a href="javascript:addTab('tabId_list','list','/FirstSSM/article/list');">list</a>
-				</div>
-				<div><a href="javascript:addTab('tabId_datagrid','datagrid','/FirstSSM/article/index');">datagrid</a>
-				</div>
-			</div>
-			<div title="会员管理" class="firstMenu">
-				<div><a href="javascript:addTab('tabId_tree','tree','/FirstSSM/article/hello');">Tree</a>
-				</div>
-				<div><a href="javascript:addTab('tabId_datagrid','datagrid模板','/FirstSSM/article/index');">datagrid</a>
-				</div>
-			</div>
-			<div title="租车管理" class="firstMenu">
-				<div><a href="javascript:addTab('tabId_templet','租车管理','/FirstSSM/article/hello');">租车管理</a>
-				</div>
-				<div><a href="javascript:addTab('tabId_datagrid','datagrid模板','/FirstSSM/article/index');">datagrid</a>
-				</div>
-			</div>
-			<div title="系统管理" class="firstMenu">
-				<div><a href="javascript:addTab('tabId_templet','系统管理','/FirstSSM/article/list');">系统管理</a>
-				</div>
-				<div><a	href="javascript:addTab('tabId_datagrid','datagrid模板','/FirstSSM/article/index');">datagrid</a>
-				</div>
-			</div>
-			-->
 		</div>
 	</div>
 	<!-- 东部区域 -->
 	<div data-options="region:'east',split:true"
 		style="width:10px;padding:10px;"></div>
 	<!-- 底部 -->
+	<!-- 
 	<div data-options="region:'south',border:false"
 		style="height:50px;background:#A9FACD;padding:10px;">
 		<div id="footer">Copyright &copy; 大潮阳棉小城租车系统</div>
 	</div>
+	-->
 	<!-- 中央布局 -->
 	<div data-options="region:'center'" fit="true" border="false">
 		<div class="easyui-tabs" id="centerTab" fit="true" border="false">

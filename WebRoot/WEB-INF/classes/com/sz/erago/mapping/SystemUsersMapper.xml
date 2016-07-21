@@ -27,9 +27,15 @@
   	select 
   	 count(*) as totalCount
   	from system_users
-  	where is_deleted = 0
-  	<if test="userName != null" >
+  	where is_deleted = '0'
+  	<if test="userName != null and userName != ''" >
        and User_Name like CONCAT('%',#{userName,jdbcType=VARCHAR},'%') 
+    </if>
+    <if test="gender != null and gender != '-1'" >
+       and gender = #{userName,jdbcType=VARCHAR}
+    </if>
+    <if test="mobile != null and mobile != ''" >
+       and Mobile like CONCAT('%',#{mobile,jdbcType=VARCHAR},'%') 
     </if>
   	order by Dept_No
   </select>
@@ -38,7 +44,7 @@
   	select 
   	<include refid="Base_Column_List" />
   	from system_users
-  	where is_deleted = 0
+  	where is_deleted = '0'
   	<if test="userName != null" >
        and User_Name like CONCAT('%',#{userName,jdbcType=VARCHAR},'%') 
     </if>
@@ -49,9 +55,15 @@
   	select 
   	<include refid="Base_Column_List" />
   	from system_users
-  	where is_deleted = 0
-  	<if test="user.userName != null" >
+  	where is_deleted = '0'
+  	<if test="user.userName != null and user.userName != ''" >
        and User_Name like CONCAT('%',#{user.userName,jdbcType=VARCHAR},'%') 
+    </if>
+    <if test="user.gender != null and user.gender != '-1'" >
+       and gender = #{user.gender,jdbcType=VARCHAR}
+    </if>
+    <if test="user.mobile != null and user.mobile != ''" >
+       and Mobile like CONCAT('%',#{user.mobile,jdbcType=VARCHAR},'%') 
     </if>
   	order by Dept_No
   	limit #{startIndex, jdbcType=INTEGER}, #{rows, jdbcType=INTEGER}
@@ -76,7 +88,7 @@
   
   <update id="disableUserBySelectedID">
   	update system_users
-  	set is_deleted = 1
+  	set is_deleted = '1'
     where ID in 
     <foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
 	  #{item}  

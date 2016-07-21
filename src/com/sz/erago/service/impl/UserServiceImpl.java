@@ -51,7 +51,7 @@ public class UserServiceImpl implements IUserService {
 			user.setUpdateBy(1);
 			user.setUpdateDate(UtilTools.getCurrentTime());
 			user.setIsDeleted(false);			
-			userDao.insertSelective(user);
+			flag = userDao.insertSelective(user);
 		}else{
 			user.setUpdateBy(1);
 			user.setUpdateDate(UtilTools.getCurrentTime());			

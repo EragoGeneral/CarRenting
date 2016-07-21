@@ -22,8 +22,8 @@ public class UserController {
 	private IUserService userService;
 	
 	@RequestMapping("/list")
-	public @ResponseBody Map<String, Object> loadAllUser(SystemUsers user,@RequestParam(required = false, defaultValue = "1") Integer page, //第几页
-            @RequestParam(required = false, defaultValue = "10") Integer rows){
+	public @ResponseBody Map<String, Object> loadAllUser(SystemUsers user,@RequestParam(required = false) Integer page, //第几页
+            @RequestParam(required = false) Integer rows){
 		if(user == null) user = new SystemUsers();
 		//user.setUserName("系统");
 //		List<SystemUsers> userList = userService.queryAllUsers(user, page, rows);		
@@ -54,6 +54,11 @@ public class UserController {
 //		List<SystemUsers> users = userService.getUserInfoBySelectedID(selectedIDs);
 		int flag = userService.disableUserBySelectedID(selectedIDs);
 		map.put("success", flag);
+		if(flag ==1){
+			map.put("msg", "删除成功");
+		}else{
+			map.put("msg", "删除失败");
+		}
 		
 		return map;
 	}

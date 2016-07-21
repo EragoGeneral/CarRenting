@@ -13,18 +13,23 @@
 	<p>The DataGrid is created from markup, no JavaScript code needed.</p>
 	<div style="margin:20px 0;"></div>
 	
-	<table class="easyui-datagrid" title="Basic DataGrid" style="width:700px;height:250px"
-			data-options="singleSelect:true,collapsible:true,url:'/FirstSSM/article/load.json',method:'get'">
+	<table class="easyui-datagrid" title="Basic DataGrid" toolbar="#toolbar" style="width:80%;height:250px"
+			data-options="singleSelect:true,collapsible:true,url:'/CarRenting/user/list',method:'get'">
 		<thead>
 			<tr>
-				<th data-options="field:'itemid',width:80">Item ID</th>
-				<th data-options="field:'productid',width:100">Product</th>
-				<th data-options="field:'listprice',width:80,align:'right'">List Price</th>
-				<th data-options="field:'unitcost',width:80,align:'right'">Unit Cost</th>
-				<th data-options="field:'attr1',width:250">Attribute</th>
-				<th data-options="field:'status',width:60,align:'center'">Status</th>
+				<th data-options="field:'userName',width:'10%'">Name</th>
+				<th data-options="field:'gender',width:'5%',formatter:function(val, rec){if(val=='M'){return '男';}else{return '女';}}">Gender</th>
+				<th data-options="field:'birth',width:'10%',align:'left'">Birth</th>
+				<th data-options="field:'email',width:'15%',align:'center'">Email</th>
+				<th data-options="field:'mobile',width:'10%'">Mobile</th>
+				<th data-options="field:'address',align:'center'">Address</th>
 			</tr>
 		</thead>
 	</table>
+	<div id="toolbar">
+	<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">New User</a>
+	<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Edit User</a>
+	<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Remove User</a>
+</div>
 </body>
 </html>

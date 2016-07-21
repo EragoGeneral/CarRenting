@@ -13,8 +13,6 @@ public interface SystemMenuDao {
 
     int updateByPrimaryKeySelective(SystemMenu record);
 
-   
-    
     public List<SystemMenu> queryAllMenus();
     
     public SystemMenu getMenuInfoByID(Integer menuID);
