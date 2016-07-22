@@ -16,4 +16,6 @@ public interface IUserService {
 	public List<SystemUsers> getUserInfoBySelectedID(String selectedIDs);
 	
 	public int disableUserBySelectedID(String selectedIDs);
+	
+	public SystemUsers getLoginUserInfo(String name, String pwd);
 }

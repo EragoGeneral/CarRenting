@@ -28,17 +28,7 @@
 			display:inline-block;
 			width:80px;
 		}
-		#submit_search{
-			display: block;
-		    background-color: #118CF4;
-		    font-size: 12px;
-		    letter-spacing: 4px;
-		    margin-left:20px;
-		    padding-left: 4px;
-		    height: 20px;
-		    padding-top: 3px;
-		    cursor:pointer;
-		}
+		
 	</style>
 </head>
 <body>
@@ -64,7 +54,9 @@
 			        <input type="text" name="mobile" id="mobile" size=20 >
 			    </td>
 			    <td>
-			    	<a id="submit_search">搜索</a>
+			    	<!-- <a class="easyui-linkbutton l-btn l-btn-small l-btn-plain" id="submit_search">搜索</a> -->
+			    	<a id="submit_search" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">查询</a>
+			    	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true" onclick="cleanFun();">清空</a>
 			    </td>	
 	    	</tr>
 	    </table>
@@ -292,6 +284,11 @@
 			} else {
 				return new Date();
 			}
+		}
+		
+		function cleanFun() {
+			$('#searchform input').val('');
+			$('#dg').datagrid('load', {});
 		}
 	</script>
 </body>

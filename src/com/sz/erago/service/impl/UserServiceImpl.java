@@ -6,9 +6,11 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sz.erago.controller.common.UtilTools;
+import com.sz.erago.dao.LoginDao;
 import com.sz.erago.dao.SystemUserDao;
 import com.sz.erago.model.SystemUsers;
 import com.sz.erago.service.IUserService;
@@ -18,6 +20,9 @@ public class UserServiceImpl implements IUserService {
 
 	@Resource
 	private SystemUserDao userDao;
+	
+	@Autowired
+	private LoginDao loginDao;
 	
 	@Override
 	public Map<String, Object> queryAllUsers(SystemUsers user, Integer page, Integer rows) {
@@ -73,5 +78,14 @@ public class UserServiceImpl implements IUserService {
 		String[] ids = selectedIDs.split(",");
 		
 		return userDao.disableUserBySelectedID(ids);
+	}
+
+	@Override
+	public SystemUsers getLoginUserInfo(String name, String pwd) {
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("name", name);
+		param.put("pwd", pwd);
+		
+		return loginDao.getLoginUser(param);
 	}
 }

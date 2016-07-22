@@ -16,6 +16,9 @@
 
 	<mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:resources mapping="/style/**" location="/style/" />
+	<mvc:resources mapping="/js/**" location="/js/" />
+	
 	<mvc:default-servlet-handler />
 	
 	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->
@@ -32,8 +35,19 @@
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
 			<list>
-				<ref bean="mappingJacksonHttpMessageConverter" />	<!-- JSON转换器 -->
+					<bean id="fastJsonHttpMessageConverter" class="com.sz.erago.framework.converter.FastJsonHttpMessageConverter">
+						<property name="supportedMediaTypes">
+							<list>
+								<value>text/html;charset=UTF-8</value><!-- 避免IE出现下载JSON文件的情况 -->
+							</list>
+						</property>
+					</bean>
+				</list>
+			<!-- JSON转换器 -->	
+			<!-- <list>
+				<ref bean="mappingJacksonHttpMessageConverter" />	
 			</list>
+			-->
 		</property>
 	</bean>
 	<!-- 定义跳转的文件的前后缀 ，视图模式配置-->
@@ -54,4 +68,19 @@
         <property name="maxInMemorySize" value="40960" />  
     </bean> 
 
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.sz.erago.framework.interceptor.SecurityInterceptor">
+				<!-- 不需要权限验证的地址 -->
+				<property name="excludeUrls">
+					<list>
+						<value>/resource/tree</value><!-- 首页左侧功能菜单 -->
+						<value>/mobile/index</value><!-- 首页左侧功能菜单 -->
+					</list>
+				</property>
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>

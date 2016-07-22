@@ -2,21 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sz.erago.dao.SystemUserDao" >
   <resultMap id="BaseResultMap" type="com.sz.erago.model.SystemUsers" >
-    <id column="ID" property="id" jdbcType="INTEGER" />    
-    <result column="Login_Name" property="loginName" jdbcType="VARCHAR" />
-    <result column="User_Name" property="userName" jdbcType="VARCHAR" />
-    <result column="Password" property="password" jdbcType="VARCHAR" />
-    <result column="Gender" property="gender" jdbcType="VARCHAR" />        
-    <result column="Birth" property="birth" jdbcType="VARCHAR" /> 
-    <result column="Dept_No" property="deptNo" jdbcType="INTEGER" />        
-    <result column="Email" property="email" jdbcType="VARCHAR" />    
-    <result column="Mobile" property="mobile" jdbcType="VARCHAR" />    
-    <result column="Address" property="address" jdbcType="VARCHAR" />    
-    <result column="Create_By" property="createBy" jdbcType="INTEGER" />
-    <result column="Create_Date" property="createDate" jdbcType="TIMESTAMP" />
-    <result column="Update_By" property="updateBy" jdbcType="INTEGER" />
-    <result column="Update_Date" property="updateDate" jdbcType="TIMESTAMP" />    
-    <result column="Is_Deleted" property="isDeleted" jdbcType="BIT" />
+    <id column="ID" property="id"/>    
+    <result column="Login_Name" property="loginName"/>
+    <result column="User_Name" property="userName"/>
+    <result column="Password" property="password"/>
+    <result column="Gender" property="gender"/>        
+    <result column="Birth" property="birth"/> 
+    <result column="Dept_No" property="deptNo"/>        
+    <result column="Email" property="email"/>    
+    <result column="Mobile" property="mobile"/>    
+    <result column="Address" property="address"/>    
+    <result column="Create_By" property="createBy"/>
+    <result column="Create_Date" property="createDate"/>
+    <result column="Update_By" property="updateBy"/>
+    <result column="Update_Date" property="updateDate"/>    
+    <result column="Is_Deleted" property="isDeleted"/>
   </resultMap>
   <sql id="Base_Column_List" >
     ID, Login_Name, User_Name, Password, Gender, Birth, Dept_No, Email, Mobile, Address, Create_By, Create_Date, 
@@ -29,13 +29,13 @@
   	from system_users
   	where is_deleted = '0'
   	<if test="userName != null and userName != ''" >
-       and User_Name like CONCAT('%',#{userName,jdbcType=VARCHAR},'%') 
+       and User_Name like CONCAT('%',#{userName},'%') 
     </if>
     <if test="gender != null and gender != '-1'" >
-       and gender = #{userName,jdbcType=VARCHAR}
+       and gender = #{userName}
     </if>
     <if test="mobile != null and mobile != ''" >
-       and Mobile like CONCAT('%',#{mobile,jdbcType=VARCHAR},'%') 
+       and Mobile like CONCAT('%',#{mobile},'%') 
     </if>
   	order by Dept_No
   </select>
@@ -57,16 +57,16 @@
   	from system_users
   	where is_deleted = '0'
   	<if test="user.userName != null and user.userName != ''" >
-       and User_Name like CONCAT('%',#{user.userName,jdbcType=VARCHAR},'%') 
+       and User_Name like CONCAT('%',#{user.userName},'%') 
     </if>
     <if test="user.gender != null and user.gender != '-1'" >
-       and gender = #{user.gender,jdbcType=VARCHAR}
+       and gender = #{user.gender}
     </if>
     <if test="user.mobile != null and user.mobile != ''" >
-       and Mobile like CONCAT('%',#{user.mobile,jdbcType=VARCHAR},'%') 
+       and Mobile like CONCAT('%',#{user.mobile},'%') 
     </if>
   	order by Dept_No
-  	limit #{startIndex, jdbcType=INTEGER}, #{rows, jdbcType=INTEGER}
+  	limit #{startIndex}, #{rows}
   </select>
   
   <select id="getUserInfoByID" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -146,49 +146,49 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id},
       </if>
       <if test="loginName != null" >
-        #{loginName,jdbcType=VARCHAR},
+        #{loginName},
       </if>
       <if test="userName != null" >
-        #{userName,jdbcType=VARCHAR},
+        #{userName},
       </if>
       <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
+        #{password},
       </if>
       <if test="gender != null" >
-        #{gender,jdbcType=VARCHAR},
+        #{gender},
       </if>
       <if test="birth != null" >
-        #{birth,jdbcType=VARCHAR},
+        #{birth},
       </if>
       <if test="deptNo != null" >
-        #{deptNo,jdbcType=INTEGER},
+        #{deptNo},
       </if>
       <if test="email != null" >
-        #{email,jdbcType=VARCHAR},
+        #{email},
       </if>
       <if test="mobile != null" >
-        #{mobile,jdbcType=VARCHAR},
+        #{mobile},
       </if>
       <if test="address != null" >
-        #{address,jdbcType=VARCHAR},
+        #{address},
       </if>
       <if test="createBy != null" >
-        #{createBy,jdbcType=INTEGER},
+        #{createBy},
       </if>
       <if test="createDate != null" >
-        #{createDate,jdbcType=TIMESTAMP},
+        #{createDate},
       </if>
       <if test="updateBy != null" >
-        #{updateBy,jdbcType=INTEGER},
+        #{updateBy},
       </if>
       <if test="updateDate != null" >
-        #{updateDate,jdbcType=TIMESTAMP},
+        #{updateDate},
       </if>
       <if test="isDeleted != null" >
-        #{isDeleted,jdbcType=BIT},
+        #{isDeleted},
       </if>
     </trim>
   </insert>
@@ -197,48 +197,42 @@
     update system_users
     <set >
       <if test="loginName != null" >
-        Login_Name = #{loginName,jdbcType=VARCHAR},
+        Login_Name = #{loginName},
       </if>
       <if test="userName != null" >
-        User_Name = #{userName,jdbcType=VARCHAR},
+        User_Name = #{userName},
       </if>
       <if test="password != null" >
-        Password = #{password,jdbcType=VARCHAR},
+        Password = #{password},
       </if>
       <if test="gender != null" >
-        Gender = #{gender,jdbcType=VARCHAR},
+        Gender = #{gender},
       </if>
       <if test="birth != null" >
-        Birth = #{birth,jdbcType=VARCHAR},
+        Birth = #{birth},
       </if>
       <if test="deptNo != null" >
-        Dept_No = #{deptNo,jdbcType=INTEGER},
+        Dept_No = #{deptNo},
       </if>
       <if test="email != null" >
-        Email = #{email,jdbcType=VARCHAR},
+        Email = #{email},
       </if>
       <if test="mobile != null" >
-        Mobile = #{mobile,jdbcType=VARCHAR},
+        Mobile = #{mobile},
       </if>
       <if test="address != null" >
-        Address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="createBy != null" >
-        Create_By = #{createBy,jdbcType=INTEGER},
-      </if>
-      <if test="createDate != null" >
-        Create_Date = #{createDate,jdbcType=TIMESTAMP},
+        Address = #{address},
       </if>
       <if test="updateBy != null" >
-        Update_By = #{updateBy,jdbcType=INTEGER},
+        Update_By = #{updateBy},
       </if>
       <if test="updateDate != null" >
-        Update_Date = #{updateDate,jdbcType=TIMESTAMP},
+        Update_Date = #{updateDate},
       </if>
       <if test="isDeleted != null" >
-        Is_Deleted = #{isDeleted,jdbcType=BIT},
+        Is_Deleted = #{isDeleted},
       </if>
     </set>
-    where ID = #{id,jdbcType=INTEGER}
+    where ID = #{id}
   </update>
 </mapper>

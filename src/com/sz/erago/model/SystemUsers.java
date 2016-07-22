@@ -1,7 +1,6 @@
 package com.sz.erago.model;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class SystemUsers {
 	
