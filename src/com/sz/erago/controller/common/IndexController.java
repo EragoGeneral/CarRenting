@@ -1,5 +1,8 @@
 package com.sz.erago.controller.common;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -46,7 +49,12 @@ public class IndexController{
 			sessionInfo.setId(sysuser.getId().longValue());
 			sessionInfo.setLoginname(sysuser.getLoginName());
 			sessionInfo.setName(sysuser.getUserName());
-//			sessionInfo.setResourceList(userService.listResource(sysuser.getId()));
+			
+			//FIXME fix me later
+			List<String> l = new ArrayList<String>();
+			l.add("/role/add");
+			sessionInfo.setResourceList(l);
+			
 			//sessionInfo.setResourceAllList(resourceService.listAllResource());
 			session.setAttribute(GlobalConstant.SESSION_INFO, sessionInfo);
 		} else {

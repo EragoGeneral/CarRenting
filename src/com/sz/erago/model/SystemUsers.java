@@ -32,7 +32,7 @@ public class SystemUsers {
 	
 	private Timestamp updateDate;
 	
-	private Boolean isDeleted;
+	private String isDeleted;
 
 	public SystemUsers(){
 		super();
@@ -150,11 +150,11 @@ public class SystemUsers {
 		this.updateDate = updateDate;
 	}
 
-	public Boolean getIsDeleted() {
+	public String getIsDeleted() {
 		return isDeleted;
 	}
 
-	public void setIsDeleted(Boolean isDeleted) {
+	public void setIsDeleted(String isDeleted) {
 		this.isDeleted = isDeleted;
 	}
 	

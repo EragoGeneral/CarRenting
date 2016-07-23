@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sz.erago.dao.SystemRoleDao" >
+  <resultMap id="BaseResultMap" type="com.sz.erago.model.SystemRole" >
+    <id column="ID" property="id"/>    
+    <result column="Code" property="code"/>
+    <result column="Name" property="name"/>
+    <result column="Order_No" property="orderNo"/>
+    <result column="Description" property="description"/>    
+    <result column="Create_By" property="createBy"/>
+    <result column="Create_Date" property="createDate"/>
+    <result column="Update_By" property="updateBy"/>
+    <result column="Update_Date" property="updateDate"/>    
+    <result column="Is_Deleted" property="isDeleted"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, Code, Name, Order_No, Description, Create_By, Create_Date, Update_By, Update_Date, Is_Deleted
+  </sql>
+  
+  <select id="getRoleCount" resultType="java.lang.Long" parameterType="com.sz.erago.model.SystemRole">
+  	select 
+  	 count(*) as totalCount
+  	from ubt_system_roles
+  	where is_deleted = '0'
+  	<if test="code != null and code != ''" >
+       and Code like CONCAT('%',#{code},'%') 
+    </if>
+    <if test="name != null and name != '-1'" >
+       and Name like CONCAT('%',#{name},'%')
+    </if>
+    <if test="description != null and description != ''" >
+       and Descritpion like CONCAT('%',#{descrption},'%') 
+    </if>  	
+  </select>
+  
+  <select id="queryRoleList" resultMap="BaseResultMap"  parameterType="java.util.Map">
+  	select 
+  		<include refid="Base_Column_List" />
+  	from ubt_system_roles
+  	where is_deleted = '0'
+  	<if test="role.code != null and role.code != ''" >
+       and Code like CONCAT('%',#{role.code},'%') 
+    </if>
+    <if test="role.name != null and role.name != ''" >
+       and Name = #{role.name}
+    </if>
+    <if test="role.description != null and role.description != ''" >
+       and Descrption like CONCAT('%',#{role.description},'%') 
+    </if>
+  	order by Order_No
+  	limit #{startIndex}, #{rows}
+  </select>
+  
+</mapper>
