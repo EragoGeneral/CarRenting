@@ -30,7 +30,7 @@ public class IndexController{
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request) {
 		SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(GlobalConstant.SESSION_INFO);
-		if ((sessionInfo != null) && (sessionInfo.getId() != null)) {
+		if ((sessionInfo != null) && (sessionInfo.getId() != 0)) {
 			return "/index";
 		}
 		return "/login";
@@ -46,13 +46,19 @@ public class IndexController{
 			j.setMsg("登陆成功！");
 
 			SessionInfo sessionInfo = new SessionInfo();
-			sessionInfo.setId(sysuser.getId().longValue());
+			sessionInfo.setId(sysuser.getId());
 			sessionInfo.setLoginname(sysuser.getLoginName());
 			sessionInfo.setName(sysuser.getUserName());
 			
 			//FIXME fix me later
 			List<String> l = new ArrayList<String>();
 			l.add("/role/add");
+			l.add("/role/edit");
+			l.add("/role/delete");
+			l.add("/role/grant");
+			l.add("/resource/add");
+			l.add("/resource/edit");
+			l.add("/resource/delete");
 			sessionInfo.setResourceList(l);
 			
 			//sessionInfo.setResourceAllList(resourceService.listAllResource());

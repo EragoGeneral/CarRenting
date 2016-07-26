@@ -12,7 +12,12 @@
 <link rel="stylesheet" href="${ctx}/style/css/easyui.css" type="text/css">
 <link rel="stylesheet" href="${ctx}/style/css/icon.css" type="text/css">
 <link rel="stylesheet" href="${ctx}/style/css/demo.css" type="text/css">
+<!-- [扩展 css 样式] -->
+<link rel="stylesheet" href="${ctx}/style/css/common.css" type="text/css">
+
 <script type="text/javascript" src="${ctx}/js/jquery.easyui.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="${ctx}/js/easyui-lang-zh_CN.js" charset="utf-8"></script>
 <script type="text/javascript" src="${ctx}/js/common.js"></script>
+<!-- [扩展JS] -->
+<script type="text/javascript" src="${ctx}/js/extJs.js"></script>
 

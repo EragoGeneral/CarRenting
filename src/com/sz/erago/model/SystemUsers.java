@@ -1,6 +1,10 @@
 package com.sz.erago.model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.sz.erago.model.system.SystemRole;
 
 public class SystemUsers {
 	
@@ -33,6 +37,8 @@ public class SystemUsers {
 	private Timestamp updateDate;
 	
 	private String isDeleted;
+	
+	private List<SystemRole> roles = new ArrayList<SystemRole>();
 
 	public SystemUsers(){
 		super();
@@ -157,5 +163,12 @@ public class SystemUsers {
 	public void setIsDeleted(String isDeleted) {
 		this.isDeleted = isDeleted;
 	}
-	
+
+	public List<SystemRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<SystemRole> roles) {
+		this.roles = roles;
+	}
 }

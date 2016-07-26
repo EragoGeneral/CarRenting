@@ -73,7 +73,7 @@
   	select 
     <include refid="Base_Column_List" />
     from system_users
-    where ID = #{id,jdbcType=INTEGER}
+    where ID = #{id}
   </select>
   
   <select id="getUserInfoBySelectedID" resultMap="BaseResultMap">

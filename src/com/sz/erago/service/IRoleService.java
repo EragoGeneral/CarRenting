@@ -2,7 +2,7 @@ package com.sz.erago.service;
 
 import java.util.Map;
 
-import com.sz.erago.model.SystemRole;
+import com.sz.erago.model.system.SystemRole;
 
 public interface IRoleService {
 	/**
@@ -13,12 +13,14 @@ public interface IRoleService {
 	 * @return
 	 */
 	public Map<String, Object> queryRoles(SystemRole role, Integer page, Integer rows);
-	
-	public void saveRole(SystemRole role);
-	
-	public void deleteRole(Long id);
-	
+
 	public SystemRole getRoleInfo(Long id);
+	
+	public int addRole(SystemRole role);
+	
+	public int updateRole(SystemRole role);
+	
+	public int deleteRole(Long id);
 	
 	public void grantRole(SystemRole role);
 }

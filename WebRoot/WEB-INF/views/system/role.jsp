@@ -6,9 +6,13 @@
 <html>
     <head>
 	    <jsp:include page="../inc.jsp"></jsp:include>
-	    <meta http-equiv="X-UA-Compatible" content="edge" />
         <title>角色管理</title>
-        
+        <style type="text/css">
+        	#searchform{
+        		margin-left: 10px;
+    			margin-top: 6px;
+        	}
+        </style>
         <c:if test="${fn:contains(sessionInfo.resourceList, '/role/edit')}">
 			<script type="text/javascript">
 				$.canEdit = true;
@@ -16,6 +20,7 @@
 		</c:if>
 		<c:if test="${fn:contains(sessionInfo.resourceList, '/role/delete')}">
 			<script type="text/javascript">
+				$.canDelete = true;
 			</script>
 		</c:if>
 		<c:if test="${fn:contains(sessionInfo.resourceList, '/role/grant')}">
@@ -23,7 +28,6 @@
 				$.canGrant = true;
 			</script>
 		</c:if>
-		
 		<script type="text/javascript">
 			var dataGrid;
 			$(function() {
@@ -42,43 +46,49 @@
 						width : '100',
 						title : 'id',
 						field : 'id',
-						sortable : true
+						sortable : true,
+						hidden:true
 					}, {
-						width : '80',
+						width : '120',
 						title : '编码',
 						field : 'code',
 						sortable : true
 					} , {
-						width : '80',
+						width : '150',
 						title : '名称',
 						field : 'name',
 						sortable : true
 					}, {
-						width : '200',
+						width : '400',
 						title : '描述',
 						field : 'description'
 					} , {
 						field : 'action',
 						title : '操作',
-						width : 120,
+						width : 150,
 						formatter : function(value, row, index) {
 							var str = '&nbsp;';
 								if ($.canGrant) {
 									str += $.formatString('<a href="javascript:void(0)" onclick="grantFun(\'{0}\');" >授权</a>', row.id);
 								}
 							if(row.isdefault!=0){
-								str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
+								//str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
 								if ($.canEdit) {
+									str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
 									str += $.formatString('<a href="javascript:void(0)" onclick="editFun(\'{0}\');" >编辑</a>', row.id);
 								}
-								str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
+								//str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
 								if ($.canDelete) {
+									str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
 									str += $.formatString('<a href="javascript:void(0)" onclick="deleteFun(\'{0}\');" >删除</a>', row.id);
 								}
 							}
 							return str;
 						}
 					} ] ],
+					onSortColumn: function (sort, order) {
+		                
+		            },
 					toolbar : '#toolbar'
 				});
 			});
@@ -170,17 +180,60 @@
 				});
 			}
 			
+			function searchFun() {
+				var queryParams = $('#roleGrid').datagrid('options').queryParams;
+				//queryParams.mobile = '189';  
+				var array = $("#searchform").serializeArray(); 
+				for(var i = 0; i < array.length; i++){
+					var p = "queryParams."+array[i].name+" = '"+array[i].value+"';";
+					eval(p);
+				} 
+				
+				$('#roleGrid').datagrid('options').queryParams=queryParams;      
+				$('#roleGrid').datagrid('reload');
+            }	
+            
+            function cleanFun() {
+				$('#searchform input').val('');
+				$('#roleGrid').datagrid('load', {});
+			}
 			</script>
     </head>
   
-    <body  class="easyui-layout" data-options="fit:true,border:false">
-		<div data-options="region:'center',fit:true,border:false">
-			<table id="roleGrid" data-options="fit:true,border:false"></table>
-		</div>
-		<div id="toolbar" style="display: none;">
-			<c:if test="${fn:contains(sessionInfo.resourceList, '/role/add')}">
-				<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">添加</a>
-			</c:if>
+    <body>
+	    <div class="easyui-layout" style="width:'98%';height:350px;" data-options="region:'center',fit:true,border:false">
+			<div data-options="region:'north'" style="height:50px">
+				<form name="searchform" method="post" action="" id ="searchform">
+			    	<table>
+				    	<tr>
+				    		<td width="40" height="30">编号：</td>
+						    <td width="150" height="30">
+						        <input type="text" name="code" id="code" size=20 >
+						    </td>
+						    <td width="40" height="30">名称：</td>
+						    <td width="150" height="30">
+						        <input type="text" name="name" id="name" size=20 >
+						    </td>
+						    <td width="40" height="30">描述：</td>
+						    <td width="150" height="30">
+						        <input type="text" name="description" id="description" size=20 >
+						    </td>
+						    <td>
+						    	<a id="submit_search" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true, " onclick="searchFun();">查询</a>
+						    	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true" onclick="cleanFun();">清空</a>
+						    </td>	
+				    	</tr>
+				    </table>
+				  </form>
+			</div>
+			<div data-options="region:'center',title:'角色管理', fit:true,border:false,iconCls:'icon-ok'">
+				<table id="roleGrid" data-options="fit:true,border:false"></table>
+			</div>
+			<div id="toolbar" style="display: none;">
+				<c:if test="${fn:contains(sessionInfo.resourceList, '/role/add')}">
+					<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">添加</a>
+				</c:if>
+			</div>
 		</div>
   	</body>
 </html>

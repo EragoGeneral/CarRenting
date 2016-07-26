@@ -1,18 +1,27 @@
-package com.sz.erago.model;
+package com.sz.erago.model.system;
 
 import java.sql.Timestamp;
 
-public class SystemRole {
-	
+public class SystemResource {
 	private Integer id;
-	
-	private String code;
 	
 	private String name;
 	
-	private String orderNo;
-	
 	private String description;
+	
+	private String url;
+	
+	private Integer displayOrder;
+	
+	private Integer parentID;
+	
+	private Integer level;
+	
+	private Integer type;
+	
+	private String path;
+	
+	private String isDeleted;
 	
 	private Integer createBy;
 	
@@ -21,8 +30,6 @@ public class SystemRole {
 	private Integer updateBy;
 	
 	private Timestamp updateDate;
-	
-	private String isDeleted;
 
 	public Integer getId() {
 		return id;
@@ -30,14 +37,6 @@ public class SystemRole {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
 	}
 
 	public String getName() {
@@ -48,20 +47,68 @@ public class SystemRole {
 		this.name = name;
 	}
 
-	public String getOrderNo() {
-		return orderNo;
-	}
-
-	public void setOrderNo(String orderNo) {
-		this.orderNo = orderNo;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Integer getDisplayOrder() {
+		return displayOrder;
+	}
+
+	public void setDisplayOrder(Integer displayOrder) {
+		this.displayOrder = displayOrder;
+	}
+
+	public Integer getParentID() {
+		return parentID;
+	}
+
+	public void setParentID(Integer parentID) {
+		this.parentID = parentID;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public String getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(String isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	public Integer getCreateBy() {
@@ -94,13 +141,5 @@ public class SystemRole {
 
 	public void setUpdateDate(Timestamp updateDate) {
 		this.updateDate = updateDate;
-	}
-
-	public String getIsDeleted() {
-		return isDeleted;
-	}
-
-	public void setIsDeleted(String isDeleted) {
-		this.isDeleted = isDeleted;
 	}
 }

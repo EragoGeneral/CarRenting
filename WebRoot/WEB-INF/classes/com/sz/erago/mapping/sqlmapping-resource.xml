@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sz.erago.dao.SystemResourceDao" >
+  <resultMap id="BaseResultMap" type="com.sz.erago.model.system.SystemResource" >
+    <id column="ID" property="id"/>    
+    <result column="Name" property="name"/>
+    <result column="Description" property="description"/>    
+    <result column="Url" property="url"/>   
+    <result column="Display_Order" property="displayOrder"/>   
+    <result column="Parent_ID" property="parentID"/>   
+    <result column="Level" property="level"/>   
+    <result column="Type" property="type"/>   
+    <result column="Path" property="path"/>   
+    <result column="Create_By" property="createBy"/>
+    <result column="Create_Date" property="createDate"/>
+    <result column="Update_By" property="updateBy"/>
+    <result column="Update_Date" property="updateDate"/>    
+    <result column="Is_Deleted" property="isDeleted"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, Name, Description, Url, Display_Order, Parent_ID, Level, Type, Path, 
+    Create_By, Create_Date, Update_By, Update_Date, Is_Deleted
+  </sql>
+  
+  <select id="queryAllResources" resultMap="BaseResultMap"  parameterType="java.util.Map">
+  	select 
+  		<include refid="Base_Column_List" />
+  	from ubt_system_resources
+  	where is_deleted = '0'
+  	<if test="type != null" >
+       and Type = #{type}
+    </if>
+  	order by Parent_ID, Display_Order
+  </select>
+  
+  <select id="getResourceInfoByID" resultType="com.sz.erago.model.system.SystemResource" parameterType="java.lang.Integer">
+  	select 
+    <include refid="Base_Column_List" />
+    from ubt_system_resources
+    where ID = #{id} and is_deleted = '0'
+  </select>
+  
+  <select id="getResourceByRole" resultType="com.sz.erago.model.system.SystemResource" parameterType="java.lang.Long">
+  	select 
+    	res.ID, res.Name, res.Description, res.Url, res.Display_Order, res.Parent_ID
+    from ubt_system_resources res
+    join ubt_system_role_resource srr on res.ID = srr.Res_ID and srr.is_deleted = '0' 
+    join ubt_system_roles role on srr.Role_ID = role.ID    
+    where role.ID = #{id} and res.is_deleted = '0'
+  </select>
+  
+  <insert id="addResource" parameterType="com.sz.erago.model.system.SystemResource" useGeneratedKeys="true" keyProperty="id">
+    insert into ubt_system_resources
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+      <if test="url != null" >
+        Url,
+      </if>
+      <if test="displayOrder != null" >
+        Display_Order,
+      </if>   
+      <if test="parentID != null" >
+        Parent_ID,
+      </if>
+      <if test="type != null" >
+        Type,
+      </if>
+      <if test="path != null" >
+        Path,
+      </if>
+      <if test="level != null" >
+        Description,
+      </if>
+      <if test="createBy != null" >
+        Create_By,
+      </if>
+      <if test="createDate != null" >
+        Create_Date,
+      </if>
+      <if test="updateBy != null" >
+        Update_By,
+      </if>
+      <if test="updateDate != null" >
+        Update_Date,
+      </if>
+      <if test="isDeleted != null" >
+        Is_Deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="name != null" >
+        #{name},
+      </if>
+      <if test="description != null" >
+        #{description},
+      </if>
+      <if test="url != null" >
+        #{url},
+      </if>
+      <if test="displayOrder != null" >
+        #{displayOrder},
+      </if>
+      <if test="parentID != null" >
+        #{parentID},
+      </if>
+      <if test="level != null" >
+        #{level},
+      </if>
+      <if test="type != null" >
+        #{type},
+      </if>
+      <if test="path != null" >
+        #{path},
+      </if>
+      <if test="createBy != null" >
+        #{createBy},
+      </if>
+      <if test="createDate != null" >
+        #{createDate},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateResource" parameterType="com.sz.erago.model.system.SystemResource" >
+    update ubt_system_resources
+    <set >
+      <if test="name != null" >
+        Name = #{name},
+      </if>
+      <if test="url != null" >
+        Url = #{url},
+      </if>
+      <if test="description != null" >
+        Description = #{description},
+      </if>
+      <if test="displayOrder != null" >
+        Display_Order = #{displayOrder},
+      </if>  
+      <if test="parentID != null" >
+        Parent_ID = #{parentID},
+      </if>    
+      <if test="type != null" >
+        Type = #{type},
+      </if>      
+      <if test="updateBy != null" >
+        Update_By = #{updateBy},
+      </if>
+      <if test="updateDate != null" >
+        Update_Date = #{updateDate},
+      </if>
+    </set>
+    where ID = #{id}
+  </update>
+  
+  <update id="deleteResource" parameterType="java.lang.Integer" >
+    update ubt_system_resources
+    set is_deleted = '1'
+    where ID = #{id}
+  </update>
+  
+</mapper>

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sz.erago.model.SystemRole;
 import com.sz.erago.model.common.Grid;
 import com.sz.erago.model.common.Json;
+import com.sz.erago.model.system.SystemRole;
 import com.sz.erago.service.IRoleService;
 
 @Controller
@@ -41,14 +42,24 @@ public class RoleController {
 		return grid;
 	}
 	
+	@RequestMapping("/addPage")
+	public String addPage() {
+		return "/system/roleAdd";
+	}
+	
 	@RequestMapping("/add")
 	@ResponseBody
 	public Json add(SystemRole role) {
 		Json j = new Json();
 		try {
-			roleService.saveRole(role);
-			j.setSuccess(true);
-			j.setMsg("添加成功！");
+			int flag = roleService.addRole(role);
+			if(flag == 1){
+				j.setSuccess(true);
+				j.setMsg("角色添加成功！");
+			}else{
+				j.setSuccess(false);
+				j.setMsg("角色添加失败！");
+			}
 		} catch (Exception e) {
 			j.setMsg(e.getMessage());
 		}
@@ -76,10 +87,15 @@ public class RoleController {
 	}
 	
 	@RequestMapping("/editPage")
-	public String editPage(HttpServletRequest request, Long id) {
+	public String editPage(HttpServletRequest request, HttpServletResponse response, Long id) {
 		SystemRole r = roleService.getRoleInfo(id);
 		request.setAttribute("role", r);
-		return "/admin/roleEdit";
+		if(r == null){
+			request.setAttribute("msg", "当前编辑的角色不存在");
+			return "/common/error";			
+		}else{
+			return "/system/roleEdit";
+		}
 	}
 
 	@RequestMapping("/edit")
@@ -87,9 +103,17 @@ public class RoleController {
 	public Json edit(SystemRole role) {
 		Json j = new Json();
 		try {
-			roleService.saveRole(role);
-			j.setSuccess(true);
-			j.setMsg("编辑成功！");
+			int flag = roleService.updateRole(role);
+			if(flag == 1)
+			{
+				j.setSuccess(true);
+				j.setMsg("角色更新成功！");
+			}
+			else
+			{
+				j.setSuccess(false);
+				j.setMsg("角色更新失败！");
+			}
 		} catch (Exception e) {
 			j.setMsg(e.getMessage());
 		}
@@ -100,7 +124,7 @@ public class RoleController {
 	public String grantPage(HttpServletRequest request, Long id) {
 		SystemRole r = roleService.getRoleInfo(id);
 		request.setAttribute("role", r);
-		return "/admin/roleGrant";
+		return "/system/roleGrant";
 	}
 
 	@RequestMapping("/grant")

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sz.erago.dao.SystemRoleDao" >
-  <resultMap id="BaseResultMap" type="com.sz.erago.model.SystemRole" >
+  <resultMap id="BaseResultMap" type="com.sz.erago.model.system.SystemRole" >
     <id column="ID" property="id"/>    
     <result column="Code" property="code"/>
     <result column="Name" property="name"/>
@@ -17,7 +17,7 @@
     ID, Code, Name, Order_No, Description, Create_By, Create_Date, Update_By, Update_Date, Is_Deleted
   </sql>
   
-  <select id="getRoleCount" resultType="java.lang.Long" parameterType="com.sz.erago.model.SystemRole">
+  <select id="getRoleCount" resultType="java.lang.Long" parameterType="com.sz.erago.model.system.SystemRole">
   	select 
   	 count(*) as totalCount
   	from ubt_system_roles
@@ -25,11 +25,11 @@
   	<if test="code != null and code != ''" >
        and Code like CONCAT('%',#{code},'%') 
     </if>
-    <if test="name != null and name != '-1'" >
+    <if test="name != null and name != ''" >
        and Name like CONCAT('%',#{name},'%')
     </if>
     <if test="description != null and description != ''" >
-       and Descritpion like CONCAT('%',#{descrption},'%') 
+       and Description like CONCAT('%',#{description},'%') 
     </if>  	
   </select>
   
@@ -42,13 +42,135 @@
        and Code like CONCAT('%',#{role.code},'%') 
     </if>
     <if test="role.name != null and role.name != ''" >
-       and Name = #{role.name}
+       and Name like CONCAT('%',#{role.name},'%')
     </if>
     <if test="role.description != null and role.description != ''" >
-       and Descrption like CONCAT('%',#{role.description},'%') 
+       and Description like CONCAT('%',#{role.description},'%') 
     </if>
   	order by Order_No
   	limit #{startIndex}, #{rows}
   </select>
   
+  <select id="getRoleInfoByID" resultType="com.sz.erago.model.system.SystemRole" parameterType="java.lang.Long">
+  	select 
+    <include refid="Base_Column_List" />
+    from ubt_system_roles
+    where ID = #{id} and is_deleted = '0'
+  </select>
+  
+  <insert id="addRole" parameterType="com.sz.erago.model.system.SystemRole" useGeneratedKeys="true" keyProperty="id">
+    insert into ubt_system_roles
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="code != null" >
+        Code,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="orderNo != null" >
+        Order_No,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>      
+      <if test="createBy != null" >
+        Create_By,
+      </if>
+      <if test="createDate != null" >
+        Create_Date,
+      </if>
+      <if test="updateBy != null" >
+        Update_By,
+      </if>
+      <if test="updateDate != null" >
+        Update_Date,
+      </if>
+      <if test="isDeleted != null" >
+        Is_Deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="code != null" >
+        #{code},
+      </if>
+      <if test="name != null" >
+        #{name},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo},
+      </if>
+      <if test="description != null" >
+        #{description},
+      </if>
+      <if test="createBy != null" >
+        #{createBy},
+      </if>
+      <if test="createDate != null" >
+        #{createDate},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted},
+      </if>
+    </trim>
+  </insert>
+  
+	<update id="updateRole" parameterType="com.sz.erago.model.system.SystemRole" >
+    update ubt_system_roles
+    <set >
+      <if test="code != null" >
+        Code = #{code},
+      </if>
+      <if test="name != null" >
+        Name = #{name},
+      </if>
+      <if test="orderNo != null" >
+        Order_No = #{orderNo},
+      </if>
+      <if test="description != null" >
+        Description = #{description},
+      </if>      
+      <if test="updateBy != null" >
+        Update_By = #{updateBy},
+      </if>
+      <if test="updateDate != null" >
+        Update_Date = #{updateDate},
+      </if>
+    </set>
+    where ID = #{id}
+  </update>
+  
+  <update id="deleteRole" parameterType="java.lang.Long">
+  	update ubt_system_roles
+  	set is_deleted = '1'
+    where ID = #{id}
+  </update>
+  
+  	<!-- <resultMap id="queryForListMap" type="com.sz.erago.model.system.SystemRole" extends="BaseResultMap">  
+        <collection property="resources" ofType="com.sz.erago.model.system.SystemResource">  
+            <id property="id" column="ID" />  
+            <result property="name" column="Name" />  
+            <result property="url" column="Url" />  
+        </collection>
+    </resultMap>
+    
+    <select id="queryResourceByRole" resultMap="queryForListMap" parameterType="java.lang.Long">  
+        SELECT 
+        	r.code, r.name, res.id, res.name
+		FROM ubt_system_roles r
+		left JOIN ubt_system_role_resource srr ON r.ID = srr.Role_ID
+		left JOIN ubt_system_resources res ON srr.Res_ID = res.ID
+		WHERE r.ID = #{id}
+    </select>  -->
 </mapper>
