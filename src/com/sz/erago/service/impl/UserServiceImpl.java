@@ -104,11 +104,14 @@ public class UserServiceImpl implements IUserService {
 		List<SystemRole> toSelectedRoles = new ArrayList<SystemRole>();
 		
 		ownedRoles = roleDao.queryRoleByUserID(id);
-		Map<String, Integer> param = new HashMap<String, Integer>();
-		param.put("id", id);
-		param.put("curUserID", sessionInfo.getId());
-		toSelectedRoles = roleDao.queryRoleAvailableForUser(param);
-		
+//		if ("admin".equalsIgnoreCase(sessionInfo.getLoginname())){
+//			toSelectedRoles = roleDao.queryRoleAvailableForAdmin();
+//		}else{
+			Map<String, Integer> param = new HashMap<String, Integer>();
+			param.put("id", id);
+			param.put("curUserID", sessionInfo.getId());
+			toSelectedRoles = roleDao.queryRoleAvailableForUser(param);
+//		}
 		res.put("OwnedRoles", ownedRoles);
 		res.put("ToSelRoles", toSelectedRoles);
 		

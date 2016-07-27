@@ -77,6 +77,14 @@
 	WHERE u.ID = #{curUserID} AND tt.Role_ID IS NULL	
   </select>
   
+  <select id="queryRoleAvailableForAdmin" resultMap="BaseResultMap" parameterType="java.util.Map">
+  	SELECT r.ID, r.Name FROM ubt_system_roles r
+	LEFT JOIN (SELECT r.id FROM ubt_system_roles r
+	JOIN ubt_system_user_role sur ON sur.Role_ID = r.id AND sur.Is_Deleted = '0' 
+	JOIN system_users u ON u.ID = sur.User_ID AND u.Login_Name = 'admin') rr ON r.ID = rr.ID
+	WHERE rr.id IS NULL
+  </select>
+  
   
   <insert id="addRole" parameterType="com.sz.erago.model.system.SystemRole" useGeneratedKeys="true" keyProperty="id">
     insert into ubt_system_roles

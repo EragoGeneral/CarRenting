@@ -29,4 +29,6 @@ public interface SystemRoleDao {
 	
 	public List<SystemRole> queryRoleAvailableForUser(Map<String, Integer> param);
 	
+	public List<SystemRole> queryRoleAvailableForAdmin();
+	
 }
