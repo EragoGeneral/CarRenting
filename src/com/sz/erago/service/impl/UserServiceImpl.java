@@ -1,5 +1,6 @@
 package com.sz.erago.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +12,12 @@ import org.springframework.stereotype.Service;
 
 import com.sz.erago.controller.common.UtilTools;
 import com.sz.erago.dao.LoginDao;
+import com.sz.erago.dao.SystemRoleDao;
 import com.sz.erago.dao.SystemUserDao;
 import com.sz.erago.model.SystemUsers;
+import com.sz.erago.model.common.SessionInfo;
+import com.sz.erago.model.system.SystemRole;
+import com.sz.erago.model.system.SystemUserRole;
 import com.sz.erago.service.IUserService;
 
 @Service("userService")
@@ -23,6 +28,9 @@ public class UserServiceImpl implements IUserService {
 	
 	@Autowired
 	private LoginDao loginDao;
+	
+	@Autowired
+	private SystemRoleDao roleDao;
 	
 	@Override
 	public Map<String, Object> queryAllUsers(SystemUsers user, Integer page, Integer rows) {
@@ -44,7 +52,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public SystemUsers getUserInfoByID(Integer id) {
-
+		
 		return userDao.getUserInfoByID(id);
 	}
 
@@ -88,4 +96,50 @@ public class UserServiceImpl implements IUserService {
 		
 		return loginDao.getLoginUser(param);
 	}
+	
+	@Override
+	public Map<String, List<SystemRole>> loadRoleListByUser(Integer id, SessionInfo sessionInfo){
+		Map<String, List<SystemRole>> res = new HashMap<String, List<SystemRole>>();
+		List<SystemRole> ownedRoles = new ArrayList<SystemRole>();
+		List<SystemRole> toSelectedRoles = new ArrayList<SystemRole>();
+		
+		ownedRoles = roleDao.queryRoleByUserID(id);
+		Map<String, Integer> param = new HashMap<String, Integer>();
+		param.put("id", id);
+		param.put("curUserID", sessionInfo.getId());
+		toSelectedRoles = roleDao.queryRoleAvailableForUser(param);
+		
+		res.put("OwnedRoles", ownedRoles);
+		res.put("ToSelRoles", toSelectedRoles);
+		
+		return res;
+	}
+	
+	@Override
+	public void grantRole(Integer userID, String selectedRole, SessionInfo sessionInfo){
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", userID);
+		param.put("updateBy", sessionInfo.getId());
+		param.put("updateDate", UtilTools.getCurrentTime());
+		userDao.revokeRoleFromUser(param);
+		
+		List<SystemUserRole> surList = new ArrayList<SystemUserRole>();
+		String[] rIdArray = selectedRole.split(",");
+		for(String roleId : rIdArray){
+			SystemUserRole userRole = new SystemUserRole();
+			userRole.setUserID(userID);
+			userRole.setRoleID(Integer.parseInt(roleId));
+			userRole.setCreateBy(sessionInfo.getId());
+			userRole.setCreateDate(UtilTools.getCurrentTime());
+			userRole.setUpdateBy(sessionInfo.getId());
+			userRole.setUpdateDate(UtilTools.getCurrentTime());
+			userRole.setIsDeleted("0");
+			surList.add(userRole);
+		}
+		
+		if(surList.size() > 0){
+			userDao.grantRoleToUser(surList);
+		}
+	}
+	
 }

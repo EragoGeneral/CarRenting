@@ -85,7 +85,7 @@ public class RoleServiceImpl implements IRoleService {
 	}
 
 	@Override
-	public void grantRole(SystemRole role, SessionInfo sessionInfo) {
+	public void grantResource(SystemRole role, SessionInfo sessionInfo) {
 		String[] resArray = role.getResourceIds().split(",");
 		List<SystemRoleResource> roleResList = new ArrayList<SystemRoleResource>();
 		// revoke all resources assigned to the role

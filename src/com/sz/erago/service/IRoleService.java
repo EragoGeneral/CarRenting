@@ -23,5 +23,5 @@ public interface IRoleService {
 	
 	public int deleteRole(Long id);
 	
-	public void grantRole(SystemRole role, SessionInfo sessionInfo);
+	public void grantResource(SystemRole role, SessionInfo sessionInfo);
 }

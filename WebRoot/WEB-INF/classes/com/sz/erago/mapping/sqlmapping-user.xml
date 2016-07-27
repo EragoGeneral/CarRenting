@@ -235,4 +235,22 @@
     </set>
     where ID = #{id}
   </update>
+  
+  <insert id="grantRoleToUser" parameterType="java.util.List">  
+	    insert into ubt_system_user_role (User_ID, Role_ID, Create_By, Create_Date, 
+	    	Update_By, Update_Date, Is_Deleted)   
+	    values  
+	    <foreach collection="list" item="item" index="index" separator="," >  
+	        (#{item.userID}, #{item.roleID}, #{item.createBy}, #{item.createDate}, 
+	        #{item.updateBy}, #{item.updateDate}, #{item.isDeleted} )  
+	    </foreach>  
+	</insert>  
+	
+	<update id="revokeRoleFromUser" parameterType="java.util.Map">
+        update ubt_system_user_role 
+        set Update_By = #{updateBy}, 
+        Update_Date = #{updateDate},
+        Is_Deleted = '1'
+        where User_ID = #{id}
+    </update>
 </mapper>

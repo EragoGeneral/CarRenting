@@ -135,7 +135,7 @@ public class RoleController {
 		Json j = new Json();
 		SessionInfo sessionInfo = (SessionInfo)request.getSession().getAttribute((GlobalConstant.SESSION_INFO));
 		try {
-			roleService.grantRole(role, sessionInfo);
+			roleService.grantResource(role, sessionInfo);
 			j.setMsg("授权成功！");
 			j.setSuccess(true);
 		} catch (Exception e) {

@@ -58,6 +58,26 @@
     where ID = #{id} and is_deleted = '0'
   </select>
   
+  <select id="queryRoleByUserID"  resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  	SELECT role.ID, role.Name
+	FROM ubt_system_roles role
+	JOIN ubt_system_user_role sur ON sur.Role_ID = role.ID and sur.Is_Deleted = '0'
+	JOIN system_users u ON u.ID = sur.User_ID
+	where sur.User_id = #{id}  	
+  </select>
+  
+  <select id="queryRoleAvailableForUser" resultMap="BaseResultMap" parameterType="java.util.Map">
+  	SELECT DISTINCT role.ID, role.Name
+	FROM ubt_system_roles role
+	JOIN ubt_system_user_role sur ON sur.Role_ID = role.ID and sur.Is_Deleted = '0'
+	JOIN system_users u ON u.ID = sur.User_ID
+	LEFT JOIN (
+		SELECT t1.Role_ID FROM ubt_system_user_role t1 WHERE t1.User_ID = #{id} and t1.Is_Deleted = '0'
+	) tt ON tt.Role_ID = role.ID
+	WHERE u.ID = #{curUserID} AND tt.Role_ID IS NULL	
+  </select>
+  
+  
   <insert id="addRole" parameterType="com.sz.erago.model.system.SystemRole" useGeneratedKeys="true" keyProperty="id">
     insert into ubt_system_roles
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -184,11 +204,11 @@
 	    </foreach>  
 	</insert>  
 	
-	<delete id="revokeResourceFromRole" parameterType="java.util.Map">
+	<update id="revokeResourceFromRole" parameterType="java.util.Map">
         update ubt_system_role_resource 
         set Update_By = #{updateBy}, 
         Update_Date = #{updateDate},
         Is_Deleted = '1'
         where Role_ID = #{id}
-    </delete>
+    </update>
 </mapper>

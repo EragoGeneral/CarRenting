@@ -24,4 +24,9 @@ public interface SystemRoleDao {
 	public Integer grantResourceToRole(List<SystemRoleResource> roleResList);
 	
 	public void revokeResourceFromRole(Map<String, Object> param);
+	
+	public List<SystemRole> queryRoleByUserID(Integer id);
+	
+	public List<SystemRole> queryRoleAvailableForUser(Map<String, Integer> param);
+	
 }

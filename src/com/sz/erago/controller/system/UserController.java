@@ -5,13 +5,18 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sz.erago.framework.constant.GlobalConstant;
 import com.sz.erago.model.SystemUsers;
+import com.sz.erago.model.common.Json;
+import com.sz.erago.model.common.SessionInfo;
+import com.sz.erago.model.system.SystemRole;
 import com.sz.erago.service.IUserService;
 
 @Controller
@@ -20,6 +25,11 @@ public class UserController {
 
 	@Resource
 	private IUserService userService;
+	
+	@RequestMapping("/manage")
+	public String manager() {
+		return "/system/user";
+	}
 	
 	@RequestMapping("/list")
 	public @ResponseBody Map<String, Object> loadAllUser(SystemUsers user,@RequestParam(required = false) Integer page, //第几页
@@ -61,5 +71,39 @@ public class UserController {
 		}
 		
 		return map;
+	}
+	
+	@RequestMapping("/grantPage")
+	public String grantPage(HttpServletRequest request, Integer id) {
+		SystemUsers r = userService.getUserInfoByID(id);
+		request.setAttribute("user", r);
+		return "/system/userGrant";
+	}
+	
+	@RequestMapping("/loadRole")
+	@ResponseBody
+	public Json loadRole(HttpServletRequest request, Integer id){
+		Json j = new Json();
+		
+		SessionInfo sessionInfo = (SessionInfo)request.getSession().getAttribute(GlobalConstant.SESSION_INFO);
+		Map<String, List<SystemRole>> map = userService.loadRoleListByUser(id, sessionInfo);
+		j.setObj(map);
+		
+		return j;
+	}
+	
+	@RequestMapping("/grant")
+	@ResponseBody
+	public Json grant(HttpServletRequest request, String selectedRole, Integer userID) {
+		Json j = new Json();
+		SessionInfo sessionInfo = (SessionInfo)request.getSession().getAttribute((GlobalConstant.SESSION_INFO));
+		try {
+			userService.grantRole(userID, selectedRole, sessionInfo);
+			j.setMsg("授权成功！");
+			j.setSuccess(true);
+		} catch (Exception e) {
+			j.setMsg(e.getMessage());
+		}
+		return j;
 	}
 }

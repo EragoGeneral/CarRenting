@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sz.erago.model.SystemUsers;
+import com.sz.erago.model.system.SystemUserRole;
 
 public interface SystemUserDao {
 	
@@ -22,4 +23,8 @@ public interface SystemUserDao {
 	public List<SystemUsers> getUserInfoBySelectedID(String[] selectedIDs);
 	
 	public int disableUserBySelectedID(String[] selectedIDs);
+	
+	public int grantRoleToUser(List<SystemUserRole> userRoleList);
+	
+	public void revokeRoleFromUser(Map<String, Object> param);	
 }
