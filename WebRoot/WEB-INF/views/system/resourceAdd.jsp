@@ -44,8 +44,8 @@
 				<td><input name="name" type="text" placeholder="请输入资源名称" class="easyui-validatebox span2" data-options="required:true" ></td>
 				<td>资源类型</td>
 				<td><select name="type" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
-							<option value="0">菜单</option>
-							<option value="1">按钮</option>
+							<option value="1">菜单</option>
+							<option value="0">按钮</option>
 				</select></td>
 			</tr>
 			<tr>

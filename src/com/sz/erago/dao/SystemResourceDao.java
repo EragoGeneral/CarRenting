@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.sz.erago.model.system.SystemResource;
-import com.sz.erago.model.system.SystemRoleResource;
 
 public interface SystemResourceDao {
 	public List<SystemResource> queryAllResources(Map<String, Object> param);

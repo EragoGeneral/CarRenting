@@ -51,7 +51,7 @@
   	limit #{startIndex}, #{rows}
   </select>
   
-  <select id="getRoleInfoByID" resultType="com.sz.erago.model.system.SystemRole" parameterType="java.lang.Long">
+  <select id="getRoleInfoByID" resultMap="BaseResultMap" parameterType="java.lang.Long">
   	select 
     <include refid="Base_Column_List" />
     from ubt_system_roles

@@ -104,7 +104,29 @@ public class ResourceServiceImpl implements IResourceService {
 
 	@Override
 	public List<Tree> queryResourceByOwner(SessionInfo sessionInfo, boolean flag) {
+		List<Tree> lt = new ArrayList<Tree>();
+		List<SystemResource> resources = new ArrayList<SystemResource>();
+		if("admin".equalsIgnoreCase(sessionInfo.getLoginname())){
+			Map<String, Object> param = new HashMap<String, Object>();
+			resources = resourceDao.queryAllResources(param);
+		}else{
+			
+		}
 		
-		return null;
+		if(resources != null && resources.size() > 0){
+			for (SystemResource r : resources) {
+				Tree tree = new Tree();
+				tree.setId(r.getId().toString());
+				tree.setText(r.getName());
+				tree.setState("open");
+				tree.setPid(r.getParentID().toString());
+				Map<String, Object> attr = new HashMap<String, Object>();
+				attr.put("url", r.getUrl());
+				tree.setAttributes(attr);
+				lt.add(tree);
+			}
+		}
+		
+		return lt;
 	}
 }

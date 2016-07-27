@@ -33,7 +33,7 @@
   	order by Parent_ID, Display_Order
   </select>
   
-  <select id="getResourceInfoByID" resultType="com.sz.erago.model.system.SystemResource" parameterType="java.lang.Integer">
+  <select id="getResourceInfoByID" resultMap="BaseResultMap" parameterType="java.lang.Integer">
   	select 
     <include refid="Base_Column_List" />
     from ubt_system_resources

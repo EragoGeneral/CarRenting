@@ -3,6 +3,7 @@ package com.sz.erago.model.system;
 import java.sql.Timestamp;
 
 public class SystemResource {
+	
 	private Integer id;
 	
 	private String name;

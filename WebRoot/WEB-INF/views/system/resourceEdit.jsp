@@ -6,12 +6,12 @@
 
 	$(function() {
 		
-		$('#pid').combotree({
+		$('#parentID').combotree({
 			url : '${ctx}/resource/tree',
 			parentField : 'pid',
 			lines : true,
 			panelHeight : 'auto',
-			value : '${resource.pid}'
+			value : '${resource.parentID}'
 		});
 		
 		$('#resourceEditForm').form({
@@ -29,13 +29,12 @@
 				result = $.parseJSON(result);
 				if (result.success) {
 					parent.$.modalDialog.openner_treeGrid.treegrid('reload');//之所以能在这里调用到parent.$.modalDialog.openner_treeGrid这个对象，是因为resource.jsp页面预定义好了
-					parent.layout_west_tree.tree('reload');
+					//parent.layout_west_tree.tree('reload');
 					parent.$.modalDialog.handler.dialog('close');
 				}
 			}
 		});
 		
-		//$("#cstate").val('${resource.cstate}');
 		$("#type").val('${resource.type}');
 		$("#description").val('${resource.description}');
 	});
@@ -48,32 +47,21 @@
 				<td><input name="id" type="hidden"  value="${resource.id}" >
 				<input name="name" type="text" placeholder="请输入资源名称" value="${resource.name}" class="easyui-validatebox span2" data-options="required:true" ></td>
 				<td>资源类型</td>
-				<td><select id="resourcetype" name="resourcetype" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
-							<option value="0">菜单</option>
-							<option value="1">按钮</option>
+				<td><select id="type" name="type" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+							<option value="1">菜单</option>
+							<option value="0">按钮</option>
 				</select></td>
 			</tr>
 			<tr>
 				<td>资源路径</td>
 				<td><input name="url" type="text" value="${resource.url}" placeholder="请输入资源路径" class="easyui-validatebox span2" ></td>
 				<td>排序</td>
-				<td><input name=displayOrder value="${resource.displayOrder}"  class="easyui-numberspinner" style="width: 140px; height: 29px;" required="required" data-options="editable:false"></td>
+				<td><input name="displayOrder" value="${resource.displayOrder}"  class="easyui-numberspinner" style="width: 140px; height: 29px;" required="required" data-options="editable:false"></td>
 			</tr>
-			<!-- 
-			<tr>
-				<td>菜单图标</td>
-				<td ><input  name="icon" value="${resource.icon}"/></td>
-				<td>状态</td>
-				<td ><select id="cstate" name="cstate" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
-							<option value="0">正常</option>
-							<option value="1">停用</option>
-				</select></td>
-			</tr>
-			 -->
 			<tr>
 				<td>上级资源</td>
-				<td colspan="3"><select id="parentID" name="pid" style="width: 200px; height: 29px;"></select>
-				<a class="easyui-linkbutton" href="javascript:void(0)" onclick="$('#pid').combotree('clear');" >清空</a></td>
+				<td colspan="3"><select id="parentID" name="parentID" style="width: 200px; height: 29px;"></select>
+				<a class="easyui-linkbutton" href="javascript:void(0)" onclick="$('#parentID').combotree('clear');" >清空</a></td>
 			</tr>
 			<tr>
 				<td>资源描述</td>
