@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.sz.erago.controller.common.UtilTools;
 import com.sz.erago.dao.SystemResourceDao;
 import com.sz.erago.dao.SystemRoleDao;
+import com.sz.erago.model.common.SessionInfo;
 import com.sz.erago.model.system.SystemResource;
 import com.sz.erago.model.system.SystemRole;
 import com.sz.erago.model.system.SystemRoleResource;
@@ -84,15 +85,28 @@ public class RoleServiceImpl implements IRoleService {
 	}
 
 	@Override
-	public void grantRole(SystemRole role) {
+	public void grantRole(SystemRole role, SessionInfo sessionInfo) {
 		String[] resArray = role.getResourceIds().split(",");
-		List<SystemRoleResource> relList = new ArrayList<SystemRoleResource>();
+		List<SystemRoleResource> roleResList = new ArrayList<SystemRoleResource>();
+		// revoke all resources assigned to the role
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", role.getId());
+		param.put("updateBy", sessionInfo.getId());
+		param.put("updateDate", UtilTools.getCurrentTime());
+		roleDao.revokeResourceFromRole(param);
 		for(String s : resArray){
 			SystemRoleResource srr = new SystemRoleResource();
 			srr.setRoleID(role.getId());
 			srr.setResID(Integer.parseInt(s));
+			srr.setCreateBy(sessionInfo.getId());
+			srr.setCreateDate(UtilTools.getCurrentTime());
+			srr.setUpdateBy(sessionInfo.getId());
+			srr.setUpdateDate(UtilTools.getCurrentTime());
 			srr.setIsDeleted("0");
-			relList.add(srr);
+			roleResList.add(srr);
+		}
+		if(roleResList.size() > 0){
+			roleDao.grantResourceToRole(roleResList);
 		}
 	}
 

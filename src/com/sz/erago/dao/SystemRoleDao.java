@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sz.erago.model.system.SystemRole;
+import com.sz.erago.model.system.SystemRoleResource;
 
 public interface SystemRoleDao {
 	public Long getRoleCount(SystemRole role);
@@ -19,4 +20,8 @@ public interface SystemRoleDao {
 	public int deleteRole(Long id);
 	
 	public SystemRole queryResourceByRole(Long id);
+	
+	public Integer grantResourceToRole(List<SystemRoleResource> roleResList);
+	
+	public void revokeResourceFromRole(Map<String, Object> param);
 }

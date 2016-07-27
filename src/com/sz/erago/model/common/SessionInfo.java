@@ -5,7 +5,7 @@ import java.util.List;
 
 public class SessionInfo implements java.io.Serializable {
 
-	private int id;// 用户ID
+	private Integer id;// 用户ID
 	private String loginname;// 登录名
 	private String name;// 姓名
 	private String ip;// 用户IP
@@ -38,11 +38,11 @@ public class SessionInfo implements java.io.Serializable {
 		this.ip = ip;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

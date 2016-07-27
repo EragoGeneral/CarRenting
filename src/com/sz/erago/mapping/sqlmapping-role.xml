@@ -173,4 +173,22 @@
 		left JOIN ubt_system_resources res ON srr.Res_ID = res.ID
 		WHERE r.ID = #{id}
     </select>  -->
+    
+    <insert id="grantResourceToRole" parameterType="java.util.List">  
+	    insert into ubt_system_role_resource (Role_ID, Res_ID, Create_By, Create_Date, 
+	    	Update_By, Update_Date, Is_Deleted)   
+	    values  
+	    <foreach collection="list" item="item" index="index" separator="," >  
+	        (#{item.roleID}, #{item.resID}, #{item.createBy}, #{item.createDate}, 
+	        #{item.updateBy}, #{item.updateDate}, #{item.isDeleted} )  
+	    </foreach>  
+	</insert>  
+	
+	<delete id="revokeResourceFromRole" parameterType="java.util.Map">
+        update ubt_system_role_resource 
+        set Update_By = #{updateBy}, 
+        Update_Date = #{updateDate},
+        Is_Deleted = '1'
+        where Role_ID = #{id}
+    </delete>
 </mapper>

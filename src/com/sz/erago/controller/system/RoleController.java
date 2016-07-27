@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sz.erago.framework.constant.GlobalConstant;
 import com.sz.erago.model.common.Grid;
 import com.sz.erago.model.common.Json;
+import com.sz.erago.model.common.SessionInfo;
 import com.sz.erago.model.system.SystemRole;
 import com.sz.erago.service.IRoleService;
 
@@ -129,10 +131,11 @@ public class RoleController {
 
 	@RequestMapping("/grant")
 	@ResponseBody
-	public Json grant(SystemRole role) {
+	public Json grant(HttpServletRequest request, SystemRole role) {
 		Json j = new Json();
+		SessionInfo sessionInfo = (SessionInfo)request.getSession().getAttribute((GlobalConstant.SESSION_INFO));
 		try {
-			roleService.grantRole(role);
+			roleService.grantRole(role, sessionInfo);
 			j.setMsg("授权成功！");
 			j.setSuccess(true);
 		} catch (Exception e) {

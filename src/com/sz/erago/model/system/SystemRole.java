@@ -1,7 +1,6 @@
 package com.sz.erago.model.system;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SystemRole {

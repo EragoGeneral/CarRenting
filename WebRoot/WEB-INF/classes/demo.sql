@@ -16,6 +16,36 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`mybatis` /*!40100 DEFAULT CHARACTER SET
 
 USE `mybatis`;
 
+/*Table structure for table `class` */
+
+DROP TABLE IF EXISTS `class`;
+
+CREATE TABLE `class` (
+  `c_id` int(11) NOT NULL AUTO_INCREMENT,
+  `c_name` varchar(20) DEFAULT NULL,
+  `teacher_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`c_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `class` */
+
+insert  into `class`(`c_id`,`c_name`,`teacher_id`) values (1,'class_a',1),(2,'class_b',2);
+
+/*Table structure for table `student` */
+
+DROP TABLE IF EXISTS `student`;
+
+CREATE TABLE `student` (
+  `s_id` int(11) NOT NULL AUTO_INCREMENT,
+  `s_name` varchar(20) DEFAULT NULL,
+  `class_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`s_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+/*Data for the table `student` */
+
+insert  into `student`(`s_id`,`s_name`,`class_id`) values (1,'student_A',1),(2,'student_B',1),(3,'student_C',1),(4,'student_D',2),(5,'student_E',2),(6,'student_F',2);
+
 /*Table structure for table `system_menus` */
 
 DROP TABLE IF EXISTS `system_menus`;
@@ -27,6 +57,7 @@ CREATE TABLE `system_menus` (
   `Display_Order` int(11) DEFAULT NULL COMMENT '显示顺序',
   `Parent_ID` int(11) NOT NULL COMMENT '父节点ID',
   `Level` int(11) DEFAULT NULL COMMENT '菜单层级',
+  `Type` int(11) DEFAULT NULL COMMENT '资源类型',
   `Path` varchar(50) DEFAULT NULL COMMENT '菜单路径',
   `Is_Deleted` varchar(1) NOT NULL COMMENT '是否有效',
   `Create_By` int(11) DEFAULT NULL COMMENT '创建人',
@@ -34,11 +65,11 @@ CREATE TABLE `system_menus` (
   `Update_By` int(11) DEFAULT NULL COMMENT '最后更新人',
   `Update_Date` datetime DEFAULT NULL COMMENT '最后更新时间',
   PRIMARY KEY (`ID`,`Name`,`Parent_ID`,`Is_Deleted`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 /*Data for the table `system_menus` */
 
-insert  into `system_menus`(`ID`,`Name`,`Link`,`Display_Order`,`Parent_ID`,`Level`,`Path`,`Is_Deleted`,`Create_By`,`Create_Date`,`Update_By`,`Update_Date`) values (1,'系统管理','/System',1,-1,1,'1','0',1,'2016-07-20 10:50:03',1,'2016-07-20 10:50:08'),(2,'用户管理','resources/pages/user/user_list.html',1,1,2,'1.2','0',1,'2016-07-20 11:02:16',1,'2016-07-20 11:02:18'),(3,'菜单管理','resources/pages/menu/menus_list.html',3,1,2,'1.3','0',1,'2016-07-21 14:41:10',1,'2016-07-21 14:41:12'),(4,'供应商管理','/Provider',2,-1,1,'4','0',1,'2016-07-21 14:42:26',1,'2016-07-21 14:42:28'),(5,'供应商查询','resources/pages/provider/pro_list.html',1,4,2,'4.5','0',1,'2016-07-21 14:43:43',1,'2016-07-21 14:43:45'),(6,'角色管理','role/manage',2,1,2,'1.5','0',1,'2016-07-23 16:12:27',1,'2016-07-23 16:12:28');
+insert  into `system_menus`(`ID`,`Name`,`Link`,`Display_Order`,`Parent_ID`,`Level`,`Type`,`Path`,`Is_Deleted`,`Create_By`,`Create_Date`,`Update_By`,`Update_Date`) values (1,'系统管理','/System',1,-1,1,NULL,'1','0',1,'2016-07-20 10:50:03',1,'2016-07-20 10:50:08'),(2,'用户管理','resources/pages/user/user_list.html',1,1,2,NULL,'1.2','0',1,'2016-07-20 11:02:16',1,'2016-07-20 11:02:18'),(3,'菜单管理','resources/pages/menu/menus_list.html',3,1,2,NULL,'1.3','0',1,'2016-07-21 14:41:10',1,'2016-07-21 14:41:12'),(4,'供应商管理','/Provider',2,-1,1,NULL,'4','1',1,'2016-07-21 14:42:26',1,'2016-07-21 14:42:28'),(5,'供应商查询','resources/pages/provider/pro_list.html',1,4,2,NULL,'4.5','1',1,'2016-07-21 14:43:43',1,'2016-07-21 14:43:45'),(6,'角色管理','role/manage',2,1,2,NULL,'1.5','0',1,'2016-07-23 16:12:27',1,'2016-07-23 16:12:28'),(7,'资源管理','resource/manage',3,1,2,NULL,'1.7','0',1,'2016-07-26 10:05:38',1,'2016-07-26 10:05:40');
 
 /*Table structure for table `system_users` */
 
@@ -61,11 +92,71 @@ CREATE TABLE `system_users` (
   `Update_Date` datetime DEFAULT NULL,
   `Is_Deleted` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 /*Data for the table `system_users` */
 
-insert  into `system_users`(`ID`,`Login_Name`,`User_Name`,`Password`,`Gender`,`Birth`,`Dept_No`,`Email`,`Mobile`,`Address`,`Create_By`,`Create_Date`,`Update_By`,`Update_Date`,`Is_Deleted`) values (1,'admin','系统管理员','admin','M','1991-01-14',0,'aa@gmail.com','13966201125','广东省深圳市南山区高新南七道',1,'2016-07-20 10:52:15',1,'2016-07-20 16:57:21','0'),(2,'Sales','销售主管','123456','F','1984-02-21',2,'sales@sina.com','17099382771',NULL,1,'2016-07-21 10:27:36',1,'2016-07-21 10:27:38','0'),(5,'HR','人事主管','123456','F','1989-06-30',1,'hr@gmail.com','13655230078',NULL,1,'2016-07-20 17:06:38',1,'2016-07-20 17:06:38','0'),(6,'zhangsan','张三','123456','M','1990-10-21',1,'zs@163.com','18933652201',NULL,1,'2016-07-21 10:23:29',1,'2016-07-21 10:23:26','0'),(7,'Lisi','李四','123456','F','1992-11-10',1,'ls@163.com','15200930092',NULL,1,'2016-07-21 10:24:14',1,'2016-07-21 10:24:17','0'),(8,'wangwu','王五','123456','M','1989-09-21',1,'ww@sohu.com','18300928810',NULL,1,'2016-07-21 10:25:03',1,'2016-07-21 10:25:06','0'),(9,'Support','技术支持','123456','F','1993-02-15',3,NULL,'15109886522',NULL,1,'2016-07-22 16:31:22',1,'2016-07-22 16:31:39','0');
+insert  into `system_users`(`ID`,`Login_Name`,`User_Name`,`Password`,`Gender`,`Birth`,`Dept_No`,`Email`,`Mobile`,`Address`,`Create_By`,`Create_Date`,`Update_By`,`Update_Date`,`Is_Deleted`) values (1,'admin','系统管理员','admin','M','1991-01-14',0,'aa@gmail.com','13966201125','广东省深圳市南山区高新南七道',1,'2016-07-20 10:52:15',1,'2016-07-20 16:57:21','0'),(2,'Sales','销售主管','123456','F','1984-02-21',2,'sales@sina.com','17099382771',NULL,1,'2016-07-21 10:27:36',1,'2016-07-21 10:27:38','0'),(5,'HR','人事主管','123456','F','1989-06-30',1,'hr@gmail.com','13655230078',NULL,1,'2016-07-20 17:06:38',1,'2016-07-20 17:06:38','0'),(6,'zhangsan','张三','123456','M','1990-10-21',1,'zs@163.com','18933652201',NULL,1,'2016-07-21 10:23:29',1,'2016-07-21 10:23:26','0'),(7,'Lisi','李四','123456','F','1992-11-10',1,'ls@163.com','15200930092',NULL,1,'2016-07-21 10:24:14',1,'2016-07-21 10:24:17','0'),(8,'wangwu','王五','123456','M','1989-09-21',1,'ww@sohu.com','18300928810',NULL,1,'2016-07-21 10:25:03',1,'2016-07-21 10:25:06','0'),(9,'Support','技术支持','123456','F','1993-02-15',3,NULL,'15109886522',NULL,1,'2016-07-22 16:31:22',1,'2016-07-22 16:31:39','0'),(10,'OP1','秦六合','123456','F','1993-08-03',NULL,NULL,'13789099382',NULL,1,'2016-07-26 14:22:45',1,'2016-07-26 14:24:11','0');
+
+/*Table structure for table `teacher` */
+
+DROP TABLE IF EXISTS `teacher`;
+
+CREATE TABLE `teacher` (
+  `t_id` int(11) NOT NULL AUTO_INCREMENT,
+  `t_name` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`t_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `teacher` */
+
+insert  into `teacher`(`t_id`,`t_name`) values (1,'teacher1'),(2,'teacher2');
+
+/*Table structure for table `ubt_system_resources` */
+
+DROP TABLE IF EXISTS `ubt_system_resources`;
+
+CREATE TABLE `ubt_system_resources` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `Name` varchar(20) NOT NULL COMMENT '资源名称',
+  `Description` varchar(200) DEFAULT NULL COMMENT '资源描述',
+  `Url` varchar(100) DEFAULT NULL COMMENT '资源链接',
+  `Display_Order` int(11) DEFAULT NULL COMMENT '显示顺序',
+  `Parent_ID` int(11) NOT NULL COMMENT '父节点ID',
+  `Level` int(11) DEFAULT NULL COMMENT '资源层级',
+  `Type` int(11) DEFAULT NULL COMMENT '资源类型',
+  `Path` varchar(50) DEFAULT NULL COMMENT '资源路径',
+  `Is_Deleted` varchar(1) NOT NULL COMMENT '是否有效',
+  `Create_By` int(11) DEFAULT NULL COMMENT '创建人',
+  `Create_Date` datetime DEFAULT NULL COMMENT '创建时间',
+  `Update_By` int(11) DEFAULT NULL COMMENT '最后更新人',
+  `Update_Date` datetime DEFAULT NULL COMMENT '最后更新时间',
+  PRIMARY KEY (`ID`,`Name`,`Parent_ID`,`Is_Deleted`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+/*Data for the table `ubt_system_resources` */
+
+insert  into `ubt_system_resources`(`ID`,`Name`,`Description`,`Url`,`Display_Order`,`Parent_ID`,`Level`,`Type`,`Path`,`Is_Deleted`,`Create_By`,`Create_Date`,`Update_By`,`Update_Date`) values (1,'系统管理','系统管理','/System',1,-1,1,1,'1','0',1,'2016-07-20 10:50:03',1,'2016-07-20 10:50:08'),(2,'用户管理','用户管理','resources/pages/user/user_list.html',1,1,2,1,'1.2','0',1,'2016-07-20 11:02:16',1,'2016-07-20 11:02:18'),(3,'菜单管理','菜单管理','resources/pages/menu/menus_list.html',3,1,2,1,'1.3','0',1,'2016-07-21 14:41:10',1,'2016-07-21 14:41:12'),(6,'角色管理','角色管理','role/manage',2,1,2,1,'1.6','0',1,'2016-07-23 16:12:27',1,'2016-07-23 16:12:28'),(7,'列表','角色列表','role/list',1,6,3,0,'1.6.7','0',1,'2016-07-25 17:26:14',1,'2016-07-25 17:26:16'),(8,'添加','角色添加','role/add',2,6,3,0,'1.6.8','0',1,'2016-07-26 13:48:00',1,'2016-07-26 13:48:02'),(9,'修改','角色修改','role/edit',3,6,3,0,'1.6.9','0',1,'2016-07-26 13:48:46',1,'2016-07-26 13:48:48'),(10,'列表','菜单列表','/resource/list',1,3,3,0,NULL,'0',1,'2016-07-26 16:33:54',1,'2016-07-26 16:33:54'),(11,'添加',NULL,'/resource/add',1,3,NULL,1,NULL,'0',1,'2016-07-26 16:39:58',1,'2016-07-26 16:39:58');
+
+/*Table structure for table `ubt_system_role_resource` */
+
+DROP TABLE IF EXISTS `ubt_system_role_resource`;
+
+CREATE TABLE `ubt_system_role_resource` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Res_ID` int(11) DEFAULT NULL COMMENT '资源ID',
+  `Role_ID` int(11) DEFAULT NULL COMMENT '角色ID',
+  `Is_Deleted` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `Res_ID` (`Res_ID`),
+  KEY `Role_ID` (`Role_ID`),
+  CONSTRAINT `ubt_system_role_resource_ibfk_1` FOREIGN KEY (`Res_ID`) REFERENCES `ubt_system_resources` (`ID`),
+  CONSTRAINT `ubt_system_role_resource_ibfk_2` FOREIGN KEY (`Role_ID`) REFERENCES `ubt_system_roles` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `ubt_system_role_resource` */
+
+insert  into `ubt_system_role_resource`(`ID`,`Res_ID`,`Role_ID`,`Is_Deleted`) values (1,6,6,'0'),(2,7,6,'0');
 
 /*Table structure for table `ubt_system_roles` */
 
@@ -83,11 +174,11 @@ CREATE TABLE `ubt_system_roles` (
   `Update_Date` datetime DEFAULT NULL,
   `Is_Deleted` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 /*Data for the table `ubt_system_roles` */
 
-insert  into `ubt_system_roles`(`ID`,`Code`,`Name`,`Order_No`,`Description`,`Create_By`,`Create_Date`,`Update_By`,`Update_Date`,`Is_Deleted`) values (1,'admin','超级管理员',1,'超级管理员，拥有全部权限',1,'2016-07-23 15:58:21',1,'2016-07-23 15:58:21','0');
+insert  into `ubt_system_roles`(`ID`,`Code`,`Name`,`Order_No`,`Description`,`Create_By`,`Create_Date`,`Update_By`,`Update_Date`,`Is_Deleted`) values (1,'admin','超级管理员',1,'超级管理员，拥有全部权限',1,'2016-07-23 15:58:21',1,'2016-07-25 15:48:28','0'),(2,'op1','运维部门1',6,'负责部门1的运维工作',1,'2016-07-25 11:18:12',1,'2016-07-25 11:18:13','0'),(3,'op2','运维部门2',7,'负责部门2的运维工作',1,'2016-07-25 11:18:34',1,'2016-07-25 11:18:34','0'),(4,'financial','财务角色',3,'负责财务部门的工作',1,'2016-07-25 11:20:17',1,'2016-07-25 11:20:19','0'),(5,'market','市场角色',5,'负责市场部门的工作',1,'2016-07-25 11:20:21',1,'2016-07-25 11:20:23','0'),(6,'hr','人事角色',2,'负责人事部门的工作',1,'2016-07-25 11:20:25',1,'2016-07-25 11:20:26','0'),(7,'dev','研发角色',4,'负责研发部门的工作',1,'2016-07-25 11:20:28',1,'2016-07-25 11:20:30','0'),(8,'product','产品角色',NULL,'负责产品部门的工作',1,'2016-07-25 15:30:01',1,'2016-07-25 15:37:11','0'),(10,'office','行政角色',NULL,'负责行政部门的工作',1,'2016-07-25 15:49:24',1,'2016-07-25 15:49:34','0');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

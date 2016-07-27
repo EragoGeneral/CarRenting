@@ -2,6 +2,7 @@ package com.sz.erago.service;
 
 import java.util.Map;
 
+import com.sz.erago.model.common.SessionInfo;
 import com.sz.erago.model.system.SystemRole;
 
 public interface IRoleService {
@@ -22,5 +23,5 @@ public interface IRoleService {
 	
 	public int deleteRole(Long id);
 	
-	public void grantRole(SystemRole role);
+	public void grantRole(SystemRole role, SessionInfo sessionInfo);
 }
