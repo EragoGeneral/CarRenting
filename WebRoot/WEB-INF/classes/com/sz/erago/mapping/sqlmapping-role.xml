@@ -62,7 +62,7 @@
   	SELECT role.ID, role.Name
 	FROM ubt_system_roles role
 	JOIN ubt_system_user_role sur ON sur.Role_ID = role.ID and sur.Is_Deleted = '0'
-	JOIN system_users u ON u.ID = sur.User_ID
+	JOIN ubt_system_users u ON u.ID = sur.User_ID
 	where sur.User_id = #{id}  	
   </select>
   
@@ -70,7 +70,7 @@
   	SELECT DISTINCT role.ID, role.Name
 	FROM ubt_system_roles role
 	JOIN ubt_system_user_role sur ON sur.Role_ID = role.ID and sur.Is_Deleted = '0'
-	JOIN system_users u ON u.ID = sur.User_ID
+	JOIN ubt_system_users u ON u.ID = sur.User_ID
 	LEFT JOIN (
 		SELECT t1.Role_ID FROM ubt_system_user_role t1 WHERE t1.User_ID = #{id} and t1.Is_Deleted = '0'
 	) tt ON tt.Role_ID = role.ID
@@ -81,7 +81,7 @@
   	SELECT r.ID, r.Name FROM ubt_system_roles r
 	LEFT JOIN (SELECT r.id FROM ubt_system_roles r
 	JOIN ubt_system_user_role sur ON sur.Role_ID = r.id AND sur.Is_Deleted = '0' 
-	JOIN system_users u ON u.ID = sur.User_ID AND u.Login_Name = 'admin') rr ON r.ID = rr.ID
+	JOIN ubt_system_users u ON u.ID = sur.User_ID AND u.Login_Name = 'admin') rr ON r.ID = rr.ID
 	WHERE rr.id IS NULL
   </select>
   

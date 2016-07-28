@@ -114,14 +114,14 @@
       <if test="parentID != null" >
         #{parentID},
       </if>
-      <if test="level != null" >
-        #{level},
-      </if>
       <if test="type != null" >
         #{type},
       </if>
       <if test="path != null" >
         #{path},
+      </if>
+      <if test="level != null" >
+        #{level},
       </if>
       <if test="createBy != null" >
         #{createBy},

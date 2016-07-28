@@ -26,7 +26,7 @@
   <select id="getUserCount" resultType="java.lang.Integer" parameterType="com.sz.erago.model.SystemUsers">
   	select 
   	 count(*) as totalCount
-  	from system_users
+  	from ubt_system_users
   	where is_deleted = '0'
   	<if test="userName != null and userName != ''" >
        and User_Name like CONCAT('%',#{userName},'%') 
@@ -43,7 +43,7 @@
   <select id="queryAllUsers" resultMap="BaseResultMap"  parameterType="com.sz.erago.model.SystemUsers">
   	select 
   	<include refid="Base_Column_List" />
-  	from system_users
+  	from ubt_system_users
   	where is_deleted = '0'
   	<if test="userName != null" >
        and User_Name like CONCAT('%',#{userName,jdbcType=VARCHAR},'%') 
@@ -54,7 +54,7 @@
   <select id="queryAllUsers1" resultMap="BaseResultMap"  parameterType="java.util.Map">
   	select 
   	<include refid="Base_Column_List" />
-  	from system_users
+  	from ubt_system_users
   	where is_deleted = '0'
   	<if test="user.userName != null and user.userName != ''" >
        and User_Name like CONCAT('%',#{user.userName},'%') 
@@ -72,14 +72,14 @@
   <select id="getUserInfoByID" resultMap="BaseResultMap" parameterType="java.lang.Integer">
   	select 
     <include refid="Base_Column_List" />
-    from system_users
+    from ubt_system_users
     where ID = #{id}
   </select>
   
   <select id="getUserInfoBySelectedID" resultMap="BaseResultMap">
   	select 
     <include refid="Base_Column_List" />
-    from system_users
+    from ubt_system_users
     where ID in 
     <foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
 	  #{item}  
@@ -87,7 +87,7 @@
   </select>
   
   <update id="disableUserBySelectedID">
-  	update system_users
+  	update ubt_system_users
   	set is_deleted = '1'
     where ID in 
     <foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
@@ -96,7 +96,7 @@
   </update>
   
   <insert id="insertSelective" parameterType="com.sz.erago.model.SystemUsers" useGeneratedKeys="true" keyProperty="id">
-    insert into system_users
+    insert into ubt_system_users
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         ID,
@@ -194,7 +194,7 @@
   </insert>
   
   <update id="updateByPrimaryKeySelective" parameterType="com.sz.erago.model.SystemUsers" >
-    update system_users
+    update ubt_system_users
     <set >
       <if test="loginName != null" >
         Login_Name = #{loginName},

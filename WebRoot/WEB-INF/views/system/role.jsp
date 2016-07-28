@@ -231,7 +231,7 @@
 				  </form>
 			</div>
 			<div data-options="region:'center',title:'角色管理', fit:true,border:false,iconCls:'icon-ok'">
-				<table id="roleGrid" data-options="fit:true,border:false"></table>
+				<table id="roleGrid" data-options="border:false"></table>
 			</div>
 			<div id="toolbar" style="display: none;">
 				<c:if test="${fn:contains(sessionInfo.resourceList, '/role/add')}">

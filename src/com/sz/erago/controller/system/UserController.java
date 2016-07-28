@@ -35,13 +35,13 @@ public class UserController {
 	public @ResponseBody Map<String, Object> loadAllUser(SystemUsers user,@RequestParam(required = false) Integer page, //第几页
             @RequestParam(required = false) Integer rows){
 		if(user == null) user = new SystemUsers();
-		//user.setUserName("系统");
-//		List<SystemUsers> userList = userService.queryAllUsers(user, page, rows);		
-//		Map<String, Object> res = new HashMap<String, Object>();
-//		res.put("total", userList.size());
-//		res.put("rows", userList);
 		
 		return userService.queryAllUsers(user, page, rows);
+	}
+	
+	@RequestMapping("/addPage")
+	public String addPage() {
+		return "/system/userAdd";
 	}
 	
 	@RequestMapping("/save")
@@ -59,9 +59,8 @@ public class UserController {
 	}
 	
 	@RequestMapping("/del")
-	public @ResponseBody Map<String, Object> getUserInfoBySelectedID(String selectedIDs){
+	public @ResponseBody Map<String, Object> disableUserBySelectedID(String selectedIDs){
 		Map<String, Object> map = new HashMap<String, Object>();
-//		List<SystemUsers> users = userService.getUserInfoBySelectedID(selectedIDs);
 		int flag = userService.disableUserBySelectedID(selectedIDs);
 		map.put("success", flag);
 		if(flag ==1){
@@ -71,13 +70,6 @@ public class UserController {
 		}
 		
 		return map;
-	}
-	
-	@RequestMapping("/grantPage")
-	public String grantPage(HttpServletRequest request, Integer id) {
-		SystemUsers r = userService.getUserInfoByID(id);
-		request.setAttribute("user", r);
-		return "/system/userGrant";
 	}
 	
 	@RequestMapping("/loadRole")
@@ -90,6 +82,13 @@ public class UserController {
 		j.setObj(map);
 		
 		return j;
+	}
+	
+	@RequestMapping("/grantPage")
+	public String grantPage(HttpServletRequest request, Integer id) {
+		SystemUsers r = userService.getUserInfoByID(id);
+		request.setAttribute("user", r);
+		return "/system/userGrant";
 	}
 	
 	@RequestMapping("/grant")

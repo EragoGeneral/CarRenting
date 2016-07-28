@@ -12,7 +12,7 @@
     <select id="getLoginUser" parameterType="java.util.Map" resultMap="loginUserMap">
 	    select 
 	  	    ID, Login_Name, User_Name, Password, Dept_No
-	  	from system_users
+	  	from ubt_system_users
 	  	where is_deleted = '0' and login_name = #{name} and password = #{pwd}	  	
     </select>
 	
