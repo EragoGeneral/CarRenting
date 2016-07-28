@@ -50,7 +50,7 @@
 		</c:if>
 		<script type="text/javascript">
 			var url;
-		
+			var dataGrid;
 			$(function(){
 				loadGrid();
 			
@@ -76,7 +76,7 @@
 			});
 				
 			function loadGrid(){
-				$('#dg').datagrid({
+				dataGrid = $('#dg').datagrid({
 	              	url:'/CarRenting/user/list',
 	              	queryParams:{},
 	              	singleSelect : true,

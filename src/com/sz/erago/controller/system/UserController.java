@@ -51,8 +51,10 @@ public class UserController {
 		int flag = userService.saveUser(user);
 		if(flag ==1){
 			map.put("success", true);
+			map.put("msg", "用户添加成功");
 		}else{
 			map.put("success", false);
+			map.put("msg", "用户添加失败");
 		}
 		
 		return map;
