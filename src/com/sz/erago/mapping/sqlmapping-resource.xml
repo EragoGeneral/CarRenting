@@ -77,7 +77,7 @@
         Path,
       </if>
       <if test="level != null" >
-        Description,
+        Level,
       </if>
       <if test="createBy != null" >
         Create_By,
@@ -161,7 +161,10 @@
       </if>    
       <if test="type != null" >
         Type = #{type},
-      </if>      
+      </if>    
+      <if test="level != null" >
+        Level = #{level},
+      </if>  
       <if test="updateBy != null" >
         Update_By = #{updateBy},
       </if>

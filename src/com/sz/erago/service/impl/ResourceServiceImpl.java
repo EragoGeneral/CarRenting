@@ -89,6 +89,10 @@ public class ResourceServiceImpl implements IResourceService {
 	
 	@Override
 	public int addResource(SystemResource resource, SessionInfo session) {
+		SystemResource parentResource = resourceDao.getResourceInfoByID(resource.getParentID());
+		if(parentResource != null && parentResource.getLevel() != null){
+			resource.setLevel(parentResource.getLevel()+1);
+		}
 		int currentUserID = session.getId();
 		resource.setCreateBy(currentUserID);
 		resource.setCreateDate(UtilTools.getCurrentTime());
@@ -99,6 +103,10 @@ public class ResourceServiceImpl implements IResourceService {
 	}
 	
 	public int updateResource(SystemResource resource, SessionInfo sessionInfo){
+		SystemResource parentResource = resourceDao.getResourceInfoByID(resource.getParentID());
+		if(parentResource != null && parentResource.getLevel() != null){
+			resource.setLevel(parentResource.getLevel()+1);
+		}
 		Integer currentUserID = sessionInfo.getId();
 		resource.setUpdateBy(currentUserID);
 		resource.setUpdateDate(UtilTools.getCurrentTime());

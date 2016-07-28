@@ -45,7 +45,7 @@
                 	if(sarr != null){
                 		$.each(sarr, function(idx, sn){                		
                 			scontent += "<div class='menuDiv'>"
-                				+"<a class='menuLink' href=\"javascript:addTab('tabId_"+ sn.id +"', '"+ sn.name +"', '${ctx}/"+ sn.url +"');\">"+ sn.name +"</a></div>";
+                				+"<a class='menuLink' href=\"javascript:addTab('tabId_"+ sn.id +"', '"+ sn.name +"', '${ctx}"+ sn.url +"');\">"+ sn.name +"</a></div>";
                 		});
                 	}
                     $('#menu').accordion('add',{

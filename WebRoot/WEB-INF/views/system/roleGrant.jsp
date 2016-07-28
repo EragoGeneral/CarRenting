@@ -11,6 +11,21 @@
 			checkbox : true,
 			onClick : function(node) {
 			},
+			onCheck: function (node, checked) {
+                if (checked) {
+                    var parentNode = $("#resourceTree").tree('getParent', node.target);
+                    if (parentNode != null) {
+                        $("#resourceTree").tree('check', parentNode.target);
+                    }
+                } else {
+                    var childNode = $("#resourceTree").tree('getChildren', node.target);
+                    if (childNode.length > 0) {
+                        for (var i = 0; i < childNode.length; i++) {
+                            $("#resourceTree").tree('uncheck', childNode[i].target);
+                        }
+                    }
+                } 
+            },
 			onLoadSuccess : function(node, data) {
 				progressLoad();
 				$.post( '${ctx}/role/get', {
