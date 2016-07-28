@@ -178,4 +178,15 @@
     where ID = #{id}
   </update>
   
+  <select id="queryAccessResourceForUser" resultMap="BaseResultMap"  parameterType="java.lang.Integer">
+  	select 
+  		res.ID, res.Name, res.Description, res.Url, res.Display_Order, res.Parent_ID, res.Level, res.Type, res.Path, 
+    	res.Create_By, res.Create_Date, res.Update_By, res.Update_Date, res.Is_Deleted
+	FROM ubt_system_resources res
+	JOIN ubt_system_role_resource srr ON res.ID = srr.Res_ID AND srr.Is_Deleted = '0'
+	JOIN ubt_system_user_role sur ON sur.Role_ID = srr.Role_ID AND sur.Is_Deleted = '0'
+	WHERE sur.User_ID = #{id}
+  	order by res.Parent_ID, res.Display_Order
+  </select>
+  
 </mapper>

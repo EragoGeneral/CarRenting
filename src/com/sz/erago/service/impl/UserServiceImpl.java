@@ -12,10 +12,12 @@ import org.springframework.stereotype.Service;
 
 import com.sz.erago.controller.common.UtilTools;
 import com.sz.erago.dao.LoginDao;
+import com.sz.erago.dao.SystemResourceDao;
 import com.sz.erago.dao.SystemRoleDao;
 import com.sz.erago.dao.SystemUserDao;
 import com.sz.erago.model.SystemUsers;
 import com.sz.erago.model.common.SessionInfo;
+import com.sz.erago.model.system.SystemResource;
 import com.sz.erago.model.system.SystemRole;
 import com.sz.erago.model.system.SystemUserRole;
 import com.sz.erago.service.IUserService;
@@ -31,6 +33,9 @@ public class UserServiceImpl implements IUserService {
 	
 	@Autowired
 	private SystemRoleDao roleDao;
+	
+	@Autowired
+	private SystemResourceDao resourceDao;
 	
 	@Override
 	public Map<String, Object> queryAllUsers(SystemUsers user, Integer page, Integer rows) {
@@ -143,6 +148,35 @@ public class UserServiceImpl implements IUserService {
 		if(surList.size() > 0){
 			userDao.grantRoleToUser(surList);
 		}
+	}
+
+	@Override
+	public List<String> loadAccessResourceForUser(Integer id) {
+		List<String> urls = new ArrayList<String>();
+		List<SystemResource> resList = new ArrayList<SystemResource>();
+		resList = resourceDao.queryAccessResourceForUser(id);
+		if (resList.size() > 0){
+			for (SystemResource res : resList){
+				urls.add(res.getUrl());
+			}
+		}
+		
+		return urls;
+	}
+
+	@Override
+	public List<String> loadAllResourceForUser() {
+		List<String> urls = new ArrayList<String>();
+		List<SystemResource> resList = new ArrayList<SystemResource>();
+		Map<String, Object> param = new HashMap<String, Object>();
+		resList = resourceDao.queryAllResources(param);
+		if (resList.size() > 0){
+			for (SystemResource res : resList){
+				urls.add(res.getUrl());
+			}
+		}
+		
+		return urls;
 	}
 	
 }

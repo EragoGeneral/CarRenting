@@ -17,4 +17,6 @@ public interface SystemResourceDao {
 	public int deleteResource(Integer id);
 	
 	public List<SystemResource> getResourceByRole(Long id);
+	
+	public List<SystemResource> queryAccessResourceForUser(Integer id);
 }

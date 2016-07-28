@@ -74,12 +74,16 @@
 							if(row.isdefault!=0){
 								//str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
 								if ($.canEdit) {
-									str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
+									if ($.canGrant) {
+										str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
+									}
 									str += $.formatString('<a href="javascript:void(0)" onclick="editFun(\'{0}\');" >编辑</a>', row.id);
 								}
 								//str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
 								if ($.canDelete) {
-									str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
+									if ($.canGrant || $.canEdit) {
+										str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
+									}
 									str += $.formatString('<a href="javascript:void(0)" onclick="deleteFun(\'{0}\');" >删除</a>', row.id);
 								}
 							}

@@ -24,4 +24,8 @@ public interface IUserService {
 	public Map<String, List<SystemRole>> loadRoleListByUser(Integer id, SessionInfo sessionInfo);
 	
 	public void grantRole(Integer userID, String selectedRole, SessionInfo sessionInfo);
+	
+	public List<String> loadAccessResourceForUser(Integer id);
+	
+	public List<String> loadAllResourceForUser();
 }

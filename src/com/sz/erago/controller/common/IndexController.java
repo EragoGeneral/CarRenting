@@ -49,19 +49,19 @@ public class IndexController{
 			sessionInfo.setId(sysuser.getId());
 			sessionInfo.setLoginname(sysuser.getLoginName());
 			sessionInfo.setName(sysuser.getUserName());
-			
+			sessionInfo.setResourceList(userService.loadAccessResourceForUser(sysuser.getId()));
+			sessionInfo.setResourceAllList(userService.loadAllResourceForUser());
 			//FIXME fix me later
-			List<String> l = new ArrayList<String>();
-			l.add("/role/add");
-			l.add("/role/edit");
-			l.add("/role/delete");
-			l.add("/role/grant");
-			l.add("/resource/add");
-			l.add("/resource/edit");
-			l.add("/resource/delete");
-			sessionInfo.setResourceList(l);
-			
-			//sessionInfo.setResourceAllList(resourceService.listAllResource());
+//			List<String> l = new ArrayList<String>();
+//			l.add("/role/add");
+//			l.add("/role/edit");
+//			l.add("/role/delete");
+//			l.add("/role/grant");
+//			l.add("/resource/add");
+//			l.add("/resource/edit");
+//			l.add("/resource/delete");
+//			sessionInfo.setResourceList(l);
+//			sessionInfo.setResourceAllList(resourceService.listAllResource());
 			session.setAttribute(GlobalConstant.SESSION_INFO, sessionInfo);
 		} else {
 			j.setMsg("用户名或密码错误！");
