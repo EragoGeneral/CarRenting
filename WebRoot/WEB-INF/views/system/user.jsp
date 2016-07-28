@@ -147,25 +147,34 @@
 				});
 			}	
 				
-			function newUser(){
-				$('#dlg').dialog('open').dialog('setTitle','New User');
-				$('#fm').form('clear');
-			}
-			
-			function editUser(){
-				var row = $('#dg').datagrid('getSelected');
-				if (row){
-					$('#dlg').dialog('open').dialog('setTitle','Edit User');
-					$('#fm').form('load',row);
+			function editFun(id){
+				if (id == undefined) {
+					var rows = dataGrid.datagrid('getSelections');
+					id = rows[0].id;
+				} else {
+					dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 				}
-			}
-			
-			function delUser(){
-				var row = $('#dg').datagrid('getSelected');
-				if (row){
-					$.messager.confirm('Confirm','Are you sure you want to remove this user?',function(r){
+				parent.$.modalDialog({
+					title : '编辑',
+					width : 500,
+					height : 300,
+					href : '${ctx}/user/editPage?id=' + id,
+					buttons : [ {
+						text : '编辑',
+						handler : function() {
+							parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个treeGrid，所以先预定义好
+							var f = parent.$.modalDialog.handler.find('#userEditForm');
+							f.submit();
+						}
+					} ]
+				});
+			}	
+							
+			function deleteFun(id){
+				if (id != undefined){
+					$.messager.confirm('确定','确定删除该用户吗?',function(r){
 						if (r){
-							$.post('/CarRenting/user/del',{selectedIDs:row.id},function(result){
+							$.post('/CarRenting/user/del',{selectedIDs: id},function(result){
 								if (result.success){
 									$.messager.show({	// show error message
 										title: 'info',
@@ -215,7 +224,7 @@
 				});
 			}
 			
-			function grantUser(){
+			function grantFun(){
 			    var row = $('#dg').datagrid('getSelected');
 				if (row){
 					parent.$.modalDialog({

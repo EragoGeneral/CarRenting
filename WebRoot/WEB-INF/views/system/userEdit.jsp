@@ -2,8 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
 	$(function() {
-		$('#userAddForm').form('clear');
-		$('#userAddForm').form({
+
+		$('#userEditForm').form({
 			url : '${pageContext.request.contextPath}/user/save',
 			onSubmit : function() {
 				progressLoad();
@@ -25,6 +25,9 @@
 				}
 			}
 		});
+		
+		$("#gender").val('${user.gender}');
+		$("#address").val('${user.address}');
 	});
 	
 	function myformatter(date){
@@ -48,20 +51,14 @@
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false" >
 	<div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;" >
-		<form id="userAddForm" method="post" novalidate>
+		<form id="userEditForm" method="post" novalidate>
 			<table class="grid"> 
 				<tr>
-					<td>登录名</td>
-					<td>
-						<input type="hidden" name="id" />
-						<input name="loginName" class="easyui-validatebox" required="true">
-					</td>
-					<td>密码</td>
-					<td><input name="password" type="password" class="easyui-validatebox" required="true"></td>
-				</tr>
-				<tr>
 					<td>姓名</td>
-					<td><input name="userName" class="easyui-validatebox" required="true"></td>
+					<td>
+						<input type="hidden" id="id" name="id" value="${user.id}" />
+						<input name="userName" class="easyui-validatebox" required="true" value="${user.userName}" >
+					</td>
 					<td>性别</td>
 					<td>
 						<select name="gender" id="gender" class="easyui-combobox" data-options="width:150,height:24,editable:false,panelHeight:'auto'">
@@ -71,19 +68,19 @@
 				</tr>
 				<tr>
 					<td>生日</td>
-					<td><input class="easyui-datebox" name="birth" data-options="formatter:myformatter,parser:myparser"></input></td>
+					<td><input class="easyui-datebox" name="birth" data-options="formatter:myformatter,parser:myparser" value="${user.birth}" ></input></td>
 					<td>手机</td>
-					<td><input name="mobile" class="easyui-validatebox" required="true"></td>
+					<td><input name="mobile" class="easyui-validatebox" required="true" value="${user.mobile}"></td>
 				</tr>
 				<tr>
 					<td>电子邮箱</td>
-					<td><input name="email" class="easyui-validatebox" required="true"></td>
+					<td><input name="email" class="easyui-validatebox" required="true" value="${user.email}"></td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td>地址</td>
-					<td colspan="3"><textarea name="address" rows="3" cols="58"></textarea></td>
+					<td colspan="3"><textarea id="address" name="address" rows="3" cols="58"></textarea></td>
 				</tr>
 			</table>		
 		</form>

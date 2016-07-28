@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,17 +45,33 @@ public class UserController {
 		return "/system/userAdd";
 	}
 	
+	@RequestMapping("/editPage")
+	public String editPage(HttpServletRequest request, HttpServletResponse response, Integer id) {
+		SystemUsers user = userService.getUserInfoByID(id);
+		request.setAttribute("user", user);
+		if(user == null){
+			request.setAttribute("msg", "当前编辑的用户不存在");
+			return "/common/error";			
+		}else{
+			return "/system/userEdit";
+		}
+	}
+	
 	@RequestMapping("/save")
 	public @ResponseBody Map<String, Object> saveUser(SystemUsers user){
 		if(user == null) user = new SystemUsers();
+		String msg = "用户添加";
+		if (user.getId() != null){
+			msg = "用户修改";
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		int flag = userService.saveUser(user);
 		if(flag ==1){
 			map.put("success", true);
-			map.put("msg", "用户添加成功");
+			map.put("msg", msg+"成功");
 		}else{
 			map.put("success", false);
-			map.put("msg", "用户添加失败");
+			map.put("msg", msg+"失败");
 		}
 		
 		return map;
