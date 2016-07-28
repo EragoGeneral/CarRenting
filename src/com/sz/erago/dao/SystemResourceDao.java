@@ -18,5 +18,5 @@ public interface SystemResourceDao {
 	
 	public List<SystemResource> getResourceByRole(Long id);
 	
-	public List<SystemResource> queryAccessResourceForUser(Integer id);
+	public List<SystemResource> queryAccessResourceForUser(Map<String, Object> param);
 }

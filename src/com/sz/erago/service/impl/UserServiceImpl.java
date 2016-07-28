@@ -154,7 +154,9 @@ public class UserServiceImpl implements IUserService {
 	public List<String> loadAccessResourceForUser(Integer id) {
 		List<String> urls = new ArrayList<String>();
 		List<SystemResource> resList = new ArrayList<SystemResource>();
-		resList = resourceDao.queryAccessResourceForUser(id);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", id);
+		resList = resourceDao.queryAccessResourceForUser(param);
 		if (resList.size() > 0){
 			for (SystemResource res : resList){
 				urls.add(res.getUrl());

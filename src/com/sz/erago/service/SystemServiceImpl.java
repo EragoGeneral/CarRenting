@@ -28,7 +28,7 @@ public class SystemServiceImpl implements ISystemService {
 	public List<SystemMenu> buildMenus(){
 		List<SystemMenu> menus = this.menuDao.queryAllMenus();
 		
-//		SystemMenu root = new SystemMenu(-1, "ϵͳ�˵�", "/", 0, -99, 0, "0", false, 1, new Timestamp(System.currentTimeMillis()), 1, new Timestamp(System.currentTimeMillis()));
+//		SystemMenu root = new SystemMenu(-1, "系统菜单", "/", 0, -99, 0, "0", false, 1, new Timestamp(System.currentTimeMillis()), 1, new Timestamp(System.currentTimeMillis()));
 		List<SystemMenu> firstLevel = new ArrayList<SystemMenu>();
 		Map<Integer, SystemMenu> levelMap = new HashMap<Integer, SystemMenu>();
 		for(SystemMenu menu : menus){

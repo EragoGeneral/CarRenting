@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.sz.erago.controller.common.UtilTools;
 import com.sz.erago.dao.SystemResourceDao;
+import com.sz.erago.model.SystemMenu;
 import com.sz.erago.model.common.ResourceTree;
 import com.sz.erago.model.common.SessionInfo;
 import com.sz.erago.model.common.Tree;
@@ -22,10 +23,17 @@ public class ResourceServiceImpl implements IResourceService {
 	@Autowired
 	private SystemResourceDao resourceDao;
 	
-	public List<ResourceTree> treeGrid(){
+	public List<ResourceTree> treeGrid(SessionInfo sessionInfo){
 		List<ResourceTree> treeList = new ArrayList<ResourceTree>();
+		List<SystemResource> resources = new ArrayList<SystemResource>();
 		Map<String, Object> param = new HashMap<String, Object>();
-		List<SystemResource> resources = resourceDao.queryAllResources(param);
+		if ("admin".equalsIgnoreCase(sessionInfo.getLoginname())){
+			resources = resourceDao.queryAllResources(param);
+		}else{
+			param.put("id", sessionInfo.getId());
+			resources = resourceDao.queryAccessResourceForUser(param);
+		}
+		
 		if(resources != null && resources.size() > 0){
 			for(SystemResource resource : resources){
 				ResourceTree node = new ResourceTree(resource.getId(), resource.getName(), 
@@ -106,11 +114,14 @@ public class ResourceServiceImpl implements IResourceService {
 	public List<Tree> queryResourceByOwner(SessionInfo sessionInfo, boolean flag) {
 		List<Tree> lt = new ArrayList<Tree>();
 		List<SystemResource> resources = new ArrayList<SystemResource>();
+		Map<String, Object> param = new HashMap<String, Object>();
 		if("admin".equalsIgnoreCase(sessionInfo.getLoginname())){
-			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("type", 1);
 			resources = resourceDao.queryAllResources(param);
 		}else{
-			
+			param.put("type", 1);
+			param.put("id", sessionInfo.getId());
+			resources = resourceDao.queryAccessResourceForUser(param);
 		}
 		
 		if(resources != null && resources.size() > 0){
@@ -128,5 +139,34 @@ public class ResourceServiceImpl implements IResourceService {
 		}
 		
 		return lt;
+	}
+
+	@Override
+	public List<SystemResource> createMainMenu(SessionInfo sessionInfo) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", sessionInfo.getId());
+		param.put("type", "1");
+		List<SystemResource> menus = resourceDao.queryAccessResourceForUser(param);
+		
+		List<SystemResource> firstLevel = new ArrayList<SystemResource>();
+		Map<Integer, SystemResource> levelMap = new HashMap<Integer, SystemResource>();
+		for(SystemResource menu : menus){
+			if(menu.getLevel() == 1){
+				firstLevel.add(menu);
+				levelMap.put(menu.getId(), menu);
+			}else{
+				SystemResource firstLevelMenu = levelMap.get(menu.getParentID());
+				if(firstLevelMenu !=null){
+					List<SystemResource> secondLevel = firstLevelMenu.getChildren();
+					if(secondLevel == null) {
+						secondLevel = new ArrayList<SystemResource>();
+					}
+					secondLevel.add(menu);
+					firstLevelMenu.setChildren(secondLevel);
+				}
+			}
+		}
+		
+		return firstLevel;
 	}
 }

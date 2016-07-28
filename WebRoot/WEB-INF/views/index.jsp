@@ -9,7 +9,7 @@
 <script>
 	var sessionInfo_userId = '${sessionInfo.id}';
 	if (sessionInfo_userId) {//如果没有登录,直接跳转到登录页面
-		layout_west_tree_url = '${ctx}/system/MainMenu';
+		layout_west_tree_url = '${ctx}/resource/mainMenu';
 	}else{
 		window.location.href='${ctx}/admin/index';
 	}
@@ -24,9 +24,9 @@
     height: 32px;
     line-height: 32px;
     padding-left: 25px;}
-    .menuLink{font-size: 16px;
+    .menuLink{font-size: 14px;
     text-decoration: none;
-    width: 80px;}
+    color: #000000;}
 </style>
 
 <script type="text/javascript">
@@ -45,7 +45,7 @@
                 	if(sarr != null){
                 		$.each(sarr, function(idx, sn){                		
                 			scontent += "<div class='menuDiv'>"
-                				+"<a class='menuLink' href=\"javascript:addTab('tabId_"+ sn.id +"', '"+ sn.name +"', '${ctx}/"+ sn.link +"');\">"+ sn.name +"</a></div>";
+                				+"<a class='menuLink' href=\"javascript:addTab('tabId_"+ sn.id +"', '"+ sn.name +"', '${ctx}/"+ sn.url +"');\">"+ sn.name +"</a></div>";
                 		});
                 	}
                     $('#menu').accordion('add',{
@@ -68,21 +68,14 @@
 		//如果当前id的tab不存在则创建一个tab  
 		if ($("#" + tabId).html() == null) {
 			var name = 'iframe_' + tabId;
-			$('#centerTab')
-					.tabs(
-							'add',
-							{
-								title : title,
-								closable : true,
-								cache : false,
-								content : '<iframe name="'
-										+ name
-										+ '"id="'
-										+ tabId
-										+ '"src="'
-										+ url
-										+ '" width="100%" height="100%" frameborder="0" scrolling="auto" ></iframe>'
-							});
+			$('#centerTab').tabs('add',
+				{
+					title : title,
+					closable : true,
+					cache : false,
+					content : '<iframe name="' + name + '"id="' + tabId + '"src="' + url
+							+ '" width="100%" height="100%" frameborder="0" scrolling="auto" ></iframe>'
+				});
 		} else {
 			$('#centerTab').tabs('select', title);
 		}
@@ -91,10 +84,10 @@
 	function logout(){
 		$.messager.confirm('提示','确定要退出?',function(r){
 			if (r){
-				//progressLoad();
+				progressLoad();
 				$.post( '${ctx}/admin/logout', function(result) {
 					if(result.success){
-						//progressClose();
+						progressClose();
 						window.location.href='${ctx}/admin/index';
 					}
 				}, 'json');
@@ -120,7 +113,7 @@
 	</div>
 	<!-- 各个模块 -->
 	<div data-options="region:'west',split:true,title:'系统菜单'"
-		style="width:220px;">
+		style="width:165px;">
 		<!-- 子模块：模板管理 -->
 		<div id="menu" class="easyui-accordion" data-options="fit:true,border:false">
 		</div>
@@ -128,13 +121,6 @@
 	<!-- 东部区域 -->
 	<div data-options="region:'east',split:true"
 		style="width:10px;padding:10px;"></div>
-	<!-- 底部 -->
-	<!-- 
-	<div data-options="region:'south',border:false"
-		style="height:50px;background:#A9FACD;padding:10px;">
-		<div id="footer">Copyright &copy; 大潮阳棉小城租车系统</div>
-	</div>
-	-->
 	<!-- 中央布局 -->
 	<div data-options="region:'center'" fit="true" border="false">
 		<div class="easyui-tabs" id="centerTab" fit="true" border="false">
@@ -145,6 +131,8 @@
 			</div>
 		</div>
 	</div>
+	<!-- 底部 -->
+	<div data-options="region:'south',border:false" style="height: 30px;line-height:30px; overflow: hidden;text-align: center;background-color: #eee" >优必选科技有限公司 </div>
 </body>
 
 </html>

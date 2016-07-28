@@ -1,6 +1,7 @@
 package com.sz.erago.model.system;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class SystemResource {
 	
@@ -32,6 +33,8 @@ public class SystemResource {
 	
 	private Timestamp updateDate;
 
+	private List<SystemResource> children;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -142,5 +145,13 @@ public class SystemResource {
 
 	public void setUpdateDate(Timestamp updateDate) {
 		this.updateDate = updateDate;
+	}
+
+	public List<SystemResource> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<SystemResource> children) {
+		this.children = children;
 	}
 }

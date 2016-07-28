@@ -45,8 +45,18 @@ public class ResourceController{
 	
 	@RequestMapping("/treeGrid")
 	@ResponseBody
-	public List<ResourceTree> treeGrid() {
-		return resourceService.treeGrid();
+	public List<ResourceTree> treeGrid(HttpServletRequest request) {
+		SessionInfo sessionInfo = (SessionInfo)request.getSession().getAttribute(GlobalConstant.SESSION_INFO);
+		
+		return resourceService.treeGrid(sessionInfo);
+	}
+	
+	@RequestMapping("/mainMenu")
+	@ResponseBody
+	public List<SystemResource> loadMainMenu(HttpServletRequest request) {
+		SessionInfo sessionInfo = (SessionInfo)request.getSession().getAttribute(GlobalConstant.SESSION_INFO);
+		
+		return resourceService.createMainMenu(sessionInfo);
 	}
 	
 	@RequestMapping("/get")

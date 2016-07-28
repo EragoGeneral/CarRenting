@@ -8,7 +8,7 @@ import com.sz.erago.model.common.Tree;
 import com.sz.erago.model.system.SystemResource;
 
 public interface IResourceService {
-	public List<ResourceTree> treeGrid();
+	public List<ResourceTree> treeGrid(SessionInfo sessionInfo);
 	
 	public List<Tree> queryResourceByCondition(boolean flag);
 	
@@ -21,4 +21,6 @@ public interface IResourceService {
 	public int deleteResource(Integer id);
 	
 	public List<Tree> queryResourceByOwner(SessionInfo sessionInfo, boolean flag);
+	
+	public List<SystemResource> createMainMenu(SessionInfo sessionInfo);
 }
