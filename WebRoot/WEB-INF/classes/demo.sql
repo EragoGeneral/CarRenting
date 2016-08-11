@@ -112,6 +112,31 @@ CREATE TABLE `teacher` (
 
 insert  into `teacher`(`t_id`,`t_name`) values (1,'teacher1'),(2,'teacher2');
 
+/*Table structure for table `ubt_system_organization` */
+
+DROP TABLE IF EXISTS `ubt_system_organization`;
+
+CREATE TABLE `ubt_system_organization` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Code` varchar(20) DEFAULT NULL,
+  `Name` varchar(50) DEFAULT NULL,
+  `Description` varchar(255) DEFAULT NULL,
+  `Display_Order` int(11) DEFAULT NULL,
+  `Parent_ID` int(11) DEFAULT NULL,
+  `Icon` varchar(20) DEFAULT NULL,
+  `EmpCount` int(11) DEFAULT NULL,
+  `Create_By` int(11) DEFAULT NULL,
+  `Create_Date` datetime DEFAULT NULL,
+  `Update_By` int(11) DEFAULT NULL,
+  `Update_Date` datetime DEFAULT NULL,
+  `Is_Deleted` varchar(1) DEFAULT 'N',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+/*Data for the table `ubt_system_organization` */
+
+insert  into `ubt_system_organization`(`ID`,`Code`,`Name`,`Description`,`Display_Order`,`Parent_ID`,`Icon`,`EmpCount`,`Create_By`,`Create_Date`,`Update_By`,`Update_Date`,`Is_Deleted`) values (1,'Company','总公司','公司',1,-1,NULL,1,1,'2016-08-01 13:37:57',1,'2016-08-01 13:37:57','N');
+
 /*Table structure for table `ubt_system_resources` */
 
 DROP TABLE IF EXISTS `ubt_system_resources`;
