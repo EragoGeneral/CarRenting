@@ -1,9 +1,10 @@
-#Thu Jul 28 11:11:57 CST 2016
 eclipse.preferences.version=1
 encoding//WebRoot/js/common.js=UTF-8
 encoding//WebRoot/resources/pages/user/user_list.html=UTF-8
 encoding//src/com/sz/erago/controller/SystemController.java=GBK
 encoding//src/com/sz/erago/controller/common/LoginController.java=GBK
 encoding//src/com/sz/erago/controller/system/UserController.java=GBK
+encoding//src/com/sz/erago/framework/utils/HttpRequestUtils.java=GBK
 encoding//src/com/sz/erago/service/SystemServiceImpl.java=UTF-8
 encoding/<project>=UTF-8
+encoding/readme.txt=GBK
