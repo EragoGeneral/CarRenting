@@ -1,5 +1,8 @@
 package com.sz.erago.controller.webserver;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +41,21 @@ public class WebserverController {
 		
 		Json j = new Json();
 		
-		
 		return j;
 	} 
+	
+	@RequestMapping("/statiscsGames")
+	@ResponseBody
+	public Json statiscsGameCount(HttpServletRequest request){
+		String game = request.getParameter("game");
+		int count = 20;
+		
+		Json j = new Json();
+		Map<String, String> ret = new HashMap<String, String>();
+		ret.put("name", game);
+		ret.put("count", String.valueOf(count+1));
+		j.setObj(ret);
+		
+		return j;
+	}
 }
