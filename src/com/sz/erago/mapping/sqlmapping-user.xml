@@ -32,7 +32,7 @@
        and User_Name like CONCAT('%',#{userName},'%') 
     </if>
     <if test="gender != null and gender != '-1'" >
-       and gender = #{userName}
+       and gender = #{gender}
     </if>
     <if test="mobile != null and mobile != ''" >
        and Mobile like CONCAT('%',#{mobile},'%') 

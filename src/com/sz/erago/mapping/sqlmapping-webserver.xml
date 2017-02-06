@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sz.erago.dao.WebserverDao" >
+  <resultMap id="BaseResultMap" type="com.sz.erago.model.webserver.GamesStatisticsInfo" >
+    <id column="id" property="id"/>    
+    <result column="name" property="name"/>
+    <result column="count" property="count"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, count
+  </sql>
+  
+  <select id="queryGameInfo" resultMap="BaseResultMap" parameterType="com.sz.erago.model.webserver.GamesStatisticsInfo">
+  	select 
+      <include refid="Base_Column_List" />
+    from xz_games_statistics
+    where name = #{name} and is_deleted = '0'
+  </select>
+  
+  <insert id="addGame" parameterType="com.sz.erago.model.webserver.GamesStatisticsInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into xz_games_statistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name},
+      </if>
+      <if test="count != null" >
+        #{count},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateGame"  parameterType="com.sz.erago.model.webserver.GamesStatisticsInfo">
+  	update xz_games_statistics
+  	set count = count + 1
+    where name = #{name} and is_deleted = '0'
+  </update>
+  
+</mapper>

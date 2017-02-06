@@ -1,6 +1,7 @@
 package com.sz.erago.controller.webserver;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sz.erago.framework.constant.GlobalConstant;
 import com.sz.erago.framework.utils.HttpRequestUtils;
 import com.sz.erago.model.common.Json;
+import com.sz.erago.model.webserver.GamesStatisticsInfo;
 import com.sz.erago.service.IGSDataService;
+import com.sz.erago.service.IWebserverService;
 
 @Controller
 @RequestMapping("/webserver")
@@ -21,6 +24,9 @@ public class WebserverController {
 	
 	@Autowired
 	private IGSDataService gdDataService;
+	
+	@Autowired 
+	private IWebserverService webserverService;
 	
 	@RequestMapping("/manage")
 	public String manage(){
@@ -44,16 +50,23 @@ public class WebserverController {
 		return j;
 	} 
 	
-	@RequestMapping("/statiscsGames")
+	@RequestMapping("/statisticsGames")
 	@ResponseBody
 	public Json statiscsGameCount(HttpServletRequest request){
-		String game = request.getParameter("game");
-		int count = 20;
+		String name = request.getParameter("game");
+		GamesStatisticsInfo game = new GamesStatisticsInfo(name, 1);
+		
+		List<GamesStatisticsInfo> list = webserverService.queryGameInfo(game);
+		if(list != null && !list.isEmpty()){
+			webserverService.updateGame(game);
+		}else{
+			webserverService.addGame(game);
+		}
 		
 		Json j = new Json();
 		Map<String, String> ret = new HashMap<String, String>();
-		ret.put("name", game);
-		ret.put("count", String.valueOf(count+1));
+		ret.put("name", name);
+		ret.put("count", String.valueOf(game.getCount()));
 		j.setObj(ret);
 		
 		return j;
