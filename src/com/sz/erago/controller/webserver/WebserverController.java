@@ -54,8 +54,9 @@ public class WebserverController {
 	@ResponseBody
 	public Json statiscsGameCount(HttpServletRequest request){
 		String name = request.getParameter("game");
-		GamesStatisticsInfo game = new GamesStatisticsInfo(name, 1);
+		String reqPath = request.getQueryString();
 		
+		GamesStatisticsInfo game = new GamesStatisticsInfo(reqPath, name, 1);
 		List<GamesStatisticsInfo> list = webserverService.queryGameInfo(game);
 		if(list != null && !list.isEmpty()){
 			webserverService.updateGame(game);

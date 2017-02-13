@@ -3,13 +3,14 @@
 <mapper namespace="com.sz.erago.dao.WebserverDao" >
   <resultMap id="BaseResultMap" type="com.sz.erago.model.webserver.GamesStatisticsInfo" >
     <id column="id" property="id"/>    
+    <result column="req_path" property="reqPath"/>
     <result column="name" property="name"/>
     <result column="count" property="count"/>
     <result column="created_time" property="createdTime"/>
     <result column="updated_time" property="updatedTime"/>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, count, created_time, updated_time
+    id, req_path, name, count, created_time, updated_time
   </sql>
   
   <select id="queryGameInfo" resultMap="BaseResultMap" parameterType="com.sz.erago.model.webserver.GamesStatisticsInfo">
@@ -22,6 +23,9 @@
   <insert id="addGame" parameterType="com.sz.erago.model.webserver.GamesStatisticsInfo" useGeneratedKeys="true" keyProperty="id">
     insert into xz_games_statistics
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reqPath != null" >
+        req_path,
+      </if>
       <if test="name != null" >
         name,
       </if>
@@ -31,6 +35,9 @@
       created_time, updated_time
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reqPath != null" >
+         #{reqPath},
+      </if>
       <if test="name != null" >
         #{name},
       </if>
@@ -44,7 +51,7 @@
   
   <update id="updateGame"  parameterType="com.sz.erago.model.webserver.GamesStatisticsInfo">
   	update xz_games_statistics
-  	set count = count + 1, updated_time = sysdate()
+  	set count = count + 1, updated_time = sysdate(), req_path = #{reqPath}
     where name = #{name} and is_deleted = '0'
   </update>
   

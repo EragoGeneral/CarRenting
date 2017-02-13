@@ -4,22 +4,25 @@ import java.sql.Timestamp;
 
 public class GamesStatisticsInfo {
 	private Integer id;
+	private String reqPath;
 	private String name;
 	private Integer count;
 	private Timestamp createdTime;
 	private Timestamp updatedTime;
 	
-	public GamesStatisticsInfo(Integer id, String name, Integer count, Timestamp createdTime, Timestamp updatedTime) {
+	public GamesStatisticsInfo(Integer id, String reqPath, String name, Integer count, Timestamp createdTime, Timestamp updatedTime) {
 		super();
 		this.id = id;
+		this.reqPath = reqPath;
 		this.name = name;
 		this.count = count;
 		this.createdTime = createdTime;
 		this.updatedTime = updatedTime;
 	}
 
-	public GamesStatisticsInfo(String name, Integer count) {
+	public GamesStatisticsInfo(String reqPath, String name, Integer count) {
 		super();
+		this.reqPath = reqPath;
 		this.name = name;
 		this.count = count;
 	}
@@ -29,6 +32,12 @@ public class GamesStatisticsInfo {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public String getReqPath() {
+		return reqPath;
+	}
+	public void setReqPath(String reqPath) {
+		this.reqPath = reqPath;
 	}
 	public String getName() {
 		return name;
